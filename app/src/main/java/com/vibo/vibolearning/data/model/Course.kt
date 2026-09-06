@@ -79,6 +79,9 @@ data class Lesson(
     val name: String,
     val order: Int = 0,
     val xp: Int = 10,
+    /** Optional presentation hint: lesson | reading | project | challenge. */
+    val kind: String = "lesson",
+    @Serializable(with = BlockListSerializer::class)
     val blocks: List<Block> = emptyList(),
 ) {
     val questionCount: Int get() = blocks.count { it is Block.Quiz }
@@ -136,6 +139,34 @@ sealed class Block {
         val prompt: String = "Мини-практика",
         val terms: List<Term> = emptyList(),
     ) : Block()
+
+    /** A section beat. */
+    @Serializable
+    @SerialName("heading")
+    data class Heading(val text: String, val level: Int = 2) : Block()
+
+    /** An aside; the renderer owns the icon/color per [variant]. */
+    @Serializable
+    @SerialName("callout")
+    data class Callout(
+        val variant: String = "note", // note | tip | warning | important
+        val title: String = "",
+        val text: String,
+    ) : Block()
+
+    @Serializable
+    @SerialName("image")
+    data class Image(val url: String, val alt: String = "", val caption: String = "") : Block()
+
+    /** A verbatim excerpt from source material. */
+    @Serializable
+    @SerialName("quote")
+    data class Quote(val text: String, val cite: String = "", val url: String = "") : Block()
+
+    /** Forward compatibility: a block type this build doesn't know. Never thrown away. */
+    @Serializable
+    @SerialName("__unsupported")
+    data class Unsupported(val originalType: String = "") : Block()
 }
 
 /** Shared question shape — used by [Block.Quiz] and by [Exam]. */

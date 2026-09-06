@@ -21,6 +21,12 @@ sealed interface Card {
         val output: String = "",
     ) : Card
 
+    data class Heading(override val key: String, val text: String, val level: Int) : Card
+    data class Callout(override val key: String, val variant: String, val title: String, val text: String) : Card
+    data class ImageCard(override val key: String, val url: String, val alt: String, val caption: String) : Card
+    data class QuoteCard(override val key: String, val text: String, val cite: String, val url: String) : Card
+    data class Unsupported(override val key: String, val originalType: String) : Card
+
     /** Editable / runnable code sample. */
     data class CodeSample(override val key: String, val block: Block.Code) : Card
 
@@ -54,6 +60,11 @@ class SessionBuilder(private val rng: Random = Random.Default) {
                 is Block.Text -> cards += Card.Info(base, block.text, block.code, block.output)
                 is Block.Code -> cards += Card.CodeSample(base, block)
                 is Block.Quiz -> cards += Card.QuizCard(base, block.toQuestion())
+                is Block.Heading -> cards += Card.Heading(base, block.text, block.level)
+                is Block.Callout -> cards += Card.Callout(base, block.variant, block.title, block.text)
+                is Block.Image -> cards += Card.ImageCard(base, block.url, block.alt, block.caption)
+                is Block.Quote -> cards += Card.QuoteCard(base, block.text, block.cite, block.url)
+                is Block.Unsupported -> cards += Card.Unsupported(base, block.originalType)
                 is Block.Practice -> {
                     block.terms.forEach { learned[it.display] = it }
                     cards += practiceCards(base, block.prompt, block.terms)

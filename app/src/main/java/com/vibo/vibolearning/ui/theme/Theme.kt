@@ -29,7 +29,7 @@ data class VliPalette(
     val locked: Color = Color(0xFF3F424D),
     val lockedBorder: Color = Color(0xFF595D6C), // neutral-700
     val codeBg: Color = Color(0xFF292B31),       // neutral-900
-    val accent: Color = Color(0xFF9184D9),
+    val accent: Color = Color(0xFF3FCF8E),
     val onAccent: Color = Color(0xFF161826),
     val danger: Color = Color(0xFFE5484D),
 ) {

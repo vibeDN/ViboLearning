@@ -23,7 +23,7 @@
     --line:rgba(233,233,237,.14);
     --hairline:#3f424d; --locked:#3f424d; --locked-border:#595d6c;
     --code-bg:#292b31;
-    --accent:#9184d9; --on-accent:#161826;
+    --accent:#3FCF8E; --on-accent:#161826;
     --danger:#e5484d;
     --r-sm:6px; --r-md:9px; --r-lg:14px;
     --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -146,6 +146,22 @@
   }
   textarea.code{min-height:150px;resize:vertical}
   .caption{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+  .hd{font-weight:600;letter-spacing:-.01em;text-wrap:balance;color:var(--text)}
+  .hd1{font-size:26px;margin-top:8px} .hd2{font-size:21px} .hd3{font-size:17px}
+  .callout{display:flex;gap:12px;padding:14px;border-radius:var(--r-md);background:var(--surface);border-left:3px solid var(--muted)}
+  .callout.note{border-color:var(--muted)}
+  .callout.tip{border-color:var(--accent)}
+  .callout.warning{border-color:#e8b339}
+  .callout.important{border-color:var(--danger)}
+  .callout .ci{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--raised);color:var(--muted)}
+  .callout.tip .ci{color:var(--accent)} .callout.warning .ci{color:#e8b339} .callout.important .ci{color:var(--danger)}
+  .callout .ct{font-weight:600;font-size:13.5px;margin-bottom:3px}
+  .fig{margin:0;display:flex;flex-direction:column;gap:8px}
+  .fig img{width:100%;border-radius:var(--r-md);background:var(--surface);display:block}
+  .fig figcaption{color:var(--muted);font-size:12.5px;text-align:center}
+  .quote{margin:0;padding:12px 0 12px 16px;border-left:3px solid var(--line);color:color-mix(in srgb,var(--text) 88%,transparent);font-style:italic}
+  .quote cite{display:block;margin-top:8px;font-style:normal;font-size:12.5px;color:var(--muted)}
+  .quote cite a{color:var(--muted)}
   .runrow{display:flex;gap:10px;margin-top:12px}
   .out{margin-top:12px;background:var(--code-bg);border-radius:var(--r-sm);padding:14px}
   .out .k{font-size:9.5px;letter-spacing:.09em;color:var(--muted)}
@@ -235,7 +251,7 @@
     "schema": "vibolearning/v1",
     "id": "cpp-basics",
     "name": "C++ с азов",
-    "accent": "#5AC8E6",
+    "accent": "#3FCF8E",
     "description": "Самые основы: от первой программы до функций",
     "author": "ViboLearning",
     "version": 3,
@@ -1138,10 +1154,10 @@
     "schema": "vibolearning/v1",
     "id": "c-lang",
     "name": "Язык C",
-    "accent": "#A78BFA",
+    "accent": "#2FB47C",
     "description": "Большой курс: от printf до указателей, структур и файлов",
     "author": "ViboLearning",
-    "version": 1,
+    "version": 2,
     "startingHearts": 5,
     "modules": [
       {
@@ -1155,9 +1171,19 @@
             "xp": 10,
             "blocks": [
               {
+                "type": "heading",
+                "text": "Первая программа",
+                "level": 1
+              },
+              {
                 "type": "text",
                 "text": "Программа на C начинает выполняться с функции **main**. `#include <stdio.h>` подключает библиотеку ввода-вывода, откуда берётся `printf`.",
                 "code": "#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello, world\\n\");\n    return 0;\n}"
+              },
+              {
+                "type": "callout",
+                "variant": "tip",
+                "text": "Каждый оператор в C заканчивается точкой с запятой `;`. Забыл её — ошибка компиляции."
               },
               {
                 "type": "text",
@@ -2672,6 +2698,18 @@
                 "code": "int  *pi;   // указатель на int\nchar *pc;   // указатель на char\nint  *p = NULL;  // пока никуда не указывает"
               },
               {
+                "type": "callout",
+                "variant": "warning",
+                "title": "Частая ошибка",
+                "text": "Разыменование `*p`, когда `p` равен `NULL` или указывает «в никуда», — это падение программы (segmentation fault). Всегда проверяй указатель перед `*p`."
+              },
+              {
+                "type": "quote",
+                "text": "A pointer is a value that refers to (points to) an object of any type. If the object it points to changes, the pointer keeps pointing at the same location.",
+                "cite": "cppreference — Pointers",
+                "url": "https://en.cppreference.com/w/c/language/pointer"
+              },
+              {
                 "type": "quiz",
                 "variant": "single",
                 "prompt": "Что означает *p в выражении printf(\"%d\", *p);?",
@@ -3343,7 +3381,8 @@ function normalizeCourse(raw){
           const blocks = Array.isArray(l.blocks) ? l.blocks
             : Array.isArray(l.content && l.content.blocks) ? l.content.blocks : [];
           if (!blocks.length) throw new Error('В уроке "' + l.name + '" нет блоков');
-          return { id: l.id || (modId + "_l" + (li + 1)), name: l.name, xp: l.xp || 10, blocks };
+          const kind = ["lesson", "reading", "project", "challenge"].includes(l.kind) ? l.kind : "lesson";
+          return { id: l.id || (modId + "_l" + (li + 1)), name: l.name, xp: l.xp || 10, kind, blocks };
         });
       return { id: modId, name: m.name, practice: m.practice !== false, lessons, exam: m.exam || null };
     });
@@ -3387,19 +3426,35 @@ function mcqCard(term, pool){
 function matchCard(prompt, terms){
   return { t: "match", prompt, pairs: terms.slice(0, 4) };
 }
+const KNOWN_BLOCKS = ["text", "code", "quiz", "practice", "heading", "callout", "image", "quote"];
+
+function blockToCards(b, learned){
+  switch (b.type){
+    case "text":    return [{ t: "info", text: b.text || "", code: b.code || "", output: b.output || "" }];
+    case "heading": return [{ t: "heading", text: b.text || "", level: b.level || 2 }];
+    case "callout": return [{ t: "callout", variant: b.variant || "note", title: b.title || "", text: b.text || "" }];
+    case "image":   return [{ t: "image", url: b.url || "", alt: b.alt || "", caption: b.caption || "" }];
+    case "quote":   return [{ t: "quote", text: b.text || "", cite: b.cite || "", url: b.url || "" }];
+    case "code":    return [{ t: "code", code: b.code || "", output: b.output || "", lang: b.language || "cpp", editable: b.editable !== false, runnable: b.runnable !== false, caption: b.caption || "" }];
+    case "quiz":    return [{ t: "quiz", q: normQ(b) }];
+    case "practice": {
+      const terms = (b.terms || []).filter(x => x && x.meaning);
+      for (const x of terms) if (learned) learned.set(x.display, x);
+      const out = [];
+      if (terms.length >= 2) out.push(matchCard(b.prompt || "Мини-практика", terms.slice(0, 4)));
+      terms.slice(4).forEach(term => out.push(mcqCard(term, terms)));
+      return out;
+    }
+    default:
+      // forward compatibility: unknown block → its fallback, else a placeholder
+      if (b.fallback && KNOWN_BLOCKS.includes(b.fallback.type)) return blockToCards(b.fallback, learned);
+      return [{ t: "unsupported", kind: b.type || "?" }];
+  }
+}
+
 function lessonCards(lesson){
   const cards = [], learned = new Map();
-  for (const b of lesson.blocks){
-    if (b.type === "text") cards.push({ t: "info", text: b.text || "", code: b.code || "", output: b.output || "" });
-    else if (b.type === "code") cards.push({ t: "code", code: b.code || "", output: b.output || "", lang: b.language || "cpp", editable: b.editable !== false, runnable: b.runnable !== false, caption: b.caption || "" });
-    else if (b.type === "quiz") cards.push({ t: "quiz", q: normQ(b) });
-    else if (b.type === "practice"){
-      const terms = (b.terms || []).filter(x => x && x.meaning);
-      for (const x of terms) learned.set(x.display, x);
-      if (terms.length >= 2) cards.push(matchCard(b.prompt || "Мини-практика", terms.slice(0, 4)));
-      terms.slice(4).forEach(term => cards.push(mcqCard(term, terms)));
-    }
-  }
+  for (const b of lesson.blocks) cards.push(...blockToCards(b, learned));
   return { cards, learned: [...learned.values()] };
 }
 function examCards(exam){
@@ -3489,6 +3544,8 @@ const svg = {
   play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
   lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
   dumbbell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12h16M4 9v6M20 9v6M7 7v10M17 7v10"/></svg>',
+  wrench:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-2.4z"/></svg>',
+  flame:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1 .3-2 .8-2.8C7 10 8 12 9 12c0-3 3-4 3-10z"/></svg>',
   quiz:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4 2.8c-.8.4-1 .8-1 1.7V14"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg>',
   x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
   heart:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.4 2.3 5 5.7 5c2 0 3.4 1.1 4.3 2.5C11 6.1 12.4 5 14.4 5c3.4 0 5.1 3.4 3.7 6.8C19.5 16.4 12 21 12 21z"/></svg>',
@@ -3501,7 +3558,7 @@ const svg = {
 const S = { route: "home", tab: "learn", library: false, toast: null, session: null };
 
 function applyAccent(course){
-  document.documentElement.style.setProperty("--accent", course && course.accent ? course.accent : "#9184d9");
+  document.documentElement.style.setProperty("--accent", course && course.accent ? course.accent : "#3FCF8E");
 }
 function activeCourse(){
   const id = store.active() || allCourses()[0].id;
@@ -3524,7 +3581,7 @@ function buildPath(course){
       let status = "locked";
       if (isDone) status = "done";
       else if (unlocked && !currentTaken){ status = "current"; currentTaken = true; }
-      nodes.push({ kind: "lesson", id: l.id, title: l.name, status, dx: dx() });
+      nodes.push({ kind: "lesson", lkind: l.kind || "lesson", id: l.id, title: l.name, status, dx: dx() });
     }
     const allDone = m.lessons.length && m.lessons.every(l => done.has(l.id));
     if (m.practice && moduleTerms(course, m.id).length >= 2)
@@ -3542,13 +3599,14 @@ function buildPath(course){
 /* ============================ session ============================ */
 function startSession(mode, ref){
   const course = activeCourse();
-  let built, title, baseXp = 0, passScore = 0, progressId = null;
+  let built, title, baseXp = 0, passScore = 0, progressId = null, lessonKind = "lesson";
   try {
     if (mode === "lesson"){
       let lesson = null;
       for (const m of course.modules) for (const l of m.lessons) if (l.id === ref) lesson = l;
       if (!lesson) return toast("Урок не найден");
       built = lessonCards(lesson); title = lesson.name; baseXp = lesson.xp; progressId = lesson.id;
+      lessonKind = lesson.kind || "lesson";
     } else if (mode === "exam"){
       const m = course.modules.find(x => x.id === ref);
       if (!m || !m.exam) return toast("Контрольные не найдены");
@@ -3563,7 +3621,7 @@ function startSession(mode, ref){
   } catch (e){ return toast(e.message || "Не удалось собрать сессию"); }
 
   S.session = {
-    mode, ref, courseId: course.id, title, baseXp, passScore, progressId,
+    mode, ref, courseId: course.id, title, baseXp, passScore, progressId, lessonKind,
     cards: built.cards, learned: built.learned,
     i: 0, hearts: course.startingHearts, startHearts: course.startingHearts,
     correct: 0, interactive: built.cards.filter(c => c.t === "quiz" || c.t === "match").length,
@@ -3579,7 +3637,8 @@ function startSession(mode, ref){
   enterCard();
   render();
 }
-const heartsMatter = () => S.session.mode === "lesson" || S.session.mode === "exam";
+const heartsMatter = () =>
+  (S.session.mode === "lesson" && S.session.lessonKind !== "reading") || S.session.mode === "exam";
 
 function enterCard(){
   const s = S.session; clearInterval(s.timerId); s.timerId = null;
@@ -3700,7 +3759,10 @@ function nodeHtml(nd){
 
   const style = `style="transform:translateX(${nd.dx}px)"`;
   if (nd.kind === "lesson"){
-    const ic = nd.status === "done" ? svg.check : nd.status === "current" ? svg.play : svg.lock;
+    const kindIcon = { reading: svg.book, project: svg.wrench, challenge: svg.flame }[nd.lkind];
+    const ic = nd.status === "done" ? svg.check
+      : nd.status === "locked" ? svg.lock
+      : (kindIcon || svg.play);
     const dis = nd.status === "locked";
     return `<button class="node ${dis ? "is-disabled" : ""}" ${style} ${dis ? "" : `data-act="lesson" data-ref="${nd.id}"`}>
       <span class="disc ${nd.status}"><span class="fill">${ic}</span></span>
@@ -3725,7 +3787,9 @@ function viewPlay(){
   const segs = s.cards.map((_, i) => `<i class="${i < s.i ? "done" : i === s.i ? "cur" : ""}"></i>`).join("");
   const counter = s.mode === "practice"
     ? `<span class="count streak">${svg.bolt}${s.streak}</span>`
-    : `<span class="count heart">${svg.heart}${s.hearts}</span>`;
+    : (s.lessonKind === "reading"
+        ? `<span class="count" style="color:var(--muted)">${svg.book}</span>`
+        : `<span class="count heart">${svg.heart}${s.hearts}</span>`);
   const timer = (s.mode === "practice" && s.cards[s.i] && s.cards[s.i].t === "quiz")
     ? `<div class="timer"><i id="timerfill" class="${s.timeLeft <= 5 ? "low" : ""}" style="width:${s.timeLeft / 15 * 100}%"></i></div>` : "";
 
@@ -3747,6 +3811,32 @@ function cardHtml(c){
   if (c.t === "info") return `<div class="prose">${md(c.text)}</div>`
     + (c.code ? `<pre class="code" style="margin-top:16px">${esc(c.code)}</pre>` : "")
     + (c.output ? `<div class="out"><div class="k">ВЫВОД</div><pre>${esc(c.output)}</pre></div>` : "");
+
+  if (c.t === "heading")
+    return `<div class="hd hd${c.level}">${esc(c.text)}</div>`;
+
+  if (c.t === "callout"){
+    const ic = { note: "•", tip: "✦", warning: "▲", important: "!" }[c.variant] || "•";
+    return `<div class="callout ${c.variant}">
+      <div class="ci">${ic}</div>
+      <div>${c.title ? `<div class="ct">${esc(c.title)}</div>` : ""}<div class="prose">${md(c.text)}</div></div>
+    </div>`;
+  }
+
+  if (c.t === "image")
+    return `<figure class="fig">
+      <img src="${esc(c.url)}" alt="${esc(c.alt)}" loading="lazy">
+      ${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ""}
+    </figure>`;
+
+  if (c.t === "quote")
+    return `<blockquote class="quote"><div class="prose">${md(c.text)}</div>
+      ${c.cite ? `<cite>${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.cite)}</a>` : esc(c.cite)}</cite>` : ""}
+    </blockquote>`;
+
+  if (c.t === "unsupported")
+    return `<div class="callout note"><div class="ci">?</div><div><div class="ct">Блок «${esc(c.kind)}»</div>
+      <div class="prose">Этот тип блока появился в более новой версии. Обнови приложение, чтобы увидеть его.</div></div></div>`;
 
   if (c.t === "code"){
     const editor = c.editable
@@ -3823,7 +3913,7 @@ function bottomHtml(){
     </div>`;
   }
   if (!c) return "";
-  if (c.t === "info" || c.t === "code")
+  if (["info", "code", "heading", "callout", "image", "quote", "unsupported"].includes(c.t))
     return `<div class="actionbar"><button class="btn fill" data-act="next">Продолжить</button></div>`;
   if (c.t === "quiz"){
     const q = c.q;

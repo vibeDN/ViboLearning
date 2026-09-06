@@ -5,10 +5,10 @@
     android:viewportHeight="108">
     <!-- open book / path mark -->
     <path
-        android:fillColor="#9184D9"
+        android:fillColor="#3FCF8E"
         android:pathData="M32,38 h18 a6,6 0 0 1 6,6 v26 h-18 a6,6 0 0 1 -6,-6 z" />
     <path
-        android:fillColor="#B5ABFC"
+        android:fillColor="#7DE0B4"
         android:pathData="M76,38 h-18 a6,6 0 0 0 -6,6 v26 h18 a6,6 0 0 0 6,-6 z" />
     <path
         android:fillColor="#161826"

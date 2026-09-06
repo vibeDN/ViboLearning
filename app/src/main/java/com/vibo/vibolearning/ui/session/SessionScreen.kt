@@ -31,7 +31,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
@@ -152,6 +154,11 @@ private fun SessionScaffold(state: PlayUiState, vm: SessionViewModel, onExit: ()
                 is Card.CodeSample -> CodeCardView(state, vm)
                 is Card.QuizCard -> QuizView(card.question, state, vm)
                 is Card.MatchCard -> MatchView(card, state, vm)
+                is Card.Heading -> HeadingCard(card)
+                is Card.Callout -> CalloutCard(card)
+                is Card.ImageCard -> ImageCardView(card)
+                is Card.QuoteCard -> QuoteCard(card)
+                is Card.Unsupported -> UnsupportedCard(card)
                 null -> Unit
             }
         }
@@ -165,6 +172,95 @@ private fun Counter(icon: androidx.compose.ui.graphics.vector.ImageVector, value
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         Icon(icon, null, tint = tint, modifier = Modifier.size(17.dp))
         Text(value, color = tint, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+    }
+}
+
+// --- read-only cards --------------------------------------------------
+
+@Composable
+private fun HeadingCard(card: Card.Heading) {
+    val size = when (card.level) { 1 -> 26.sp; 3 -> 17.sp; else -> 21.sp }
+    Text(
+        card.text,
+        color = Vli.palette.text,
+        fontSize = size,
+        fontWeight = FontWeight.SemiBold,
+        modifier = Modifier.padding(top = 8.dp),
+    )
+}
+
+@Composable
+private fun CalloutCard(card: Card.Callout) {
+    val p = Vli.palette
+    val (accent, glyph) = when (card.variant) {
+        "tip" -> p.accent to "✦"
+        "warning" -> Color(0xFFE8B339) to "▲"
+        "important" -> p.danger to "!"
+        else -> p.textMuted to "•"
+    }
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(9.dp))
+            .background(p.surface)
+            .padding(14.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Box(
+            Modifier.size(20.dp).clip(RoundedCornerShape(50)).background(p.surfaceRaised),
+            contentAlignment = Alignment.Center,
+        ) { Text(glyph, color = accent, fontSize = 12.sp) }
+        Column {
+            if (card.title.isNotBlank()) {
+                Text(card.title, color = p.text, fontWeight = FontWeight.SemiBold, fontSize = 13.5.sp)
+                Spacer(Modifier.height(3.dp))
+            }
+            MarkdownText(card.text, fontSize = 14.sp)
+        }
+    }
+}
+
+@Composable
+private fun ImageCardView(card: Card.ImageCard) {
+    val p = Vli.palette
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        coil.compose.AsyncImage(
+            model = card.url,
+            contentDescription = card.alt.ifBlank { card.caption },
+            modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(9.dp)).background(p.surface),
+        )
+        if (card.caption.isNotBlank()) {
+            Text(card.caption, color = p.textMuted, fontSize = 12.5.sp)
+        }
+    }
+}
+
+@Composable
+private fun QuoteCard(card: Card.QuoteCard) {
+    val p = Vli.palette
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+        Box(Modifier.width(3.dp).heightIn(min = 24.dp).clip(RoundedCornerShape(2.dp)).background(p.hairline))
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(card.text, color = p.text.copy(alpha = 0.9f), fontStyle = FontStyle.Italic, fontSize = 15.sp)
+            if (card.cite.isNotBlank()) {
+                Text("— ${card.cite}", color = p.textMuted, fontSize = 12.5.sp)
+            }
+        }
+    }
+}
+
+@Composable
+private fun UnsupportedCard(card: Card.Unsupported) {
+    val p = Vli.palette
+    Column(
+        Modifier.fillMaxWidth().clip(RoundedCornerShape(9.dp)).background(p.surface).padding(14.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text("Блок «${card.originalType}»", color = p.text, fontWeight = FontWeight.SemiBold, fontSize = 13.5.sp)
+        Text(
+            "Этот тип блока появился в более новой версии. Обнови приложение, чтобы увидеть его.",
+            color = p.textMuted, fontSize = 13.sp,
+        )
     }
 }
 
@@ -507,7 +603,8 @@ private fun BottomArea(state: PlayUiState, vm: SessionViewModel) {
     }
 
     when (card) {
-        is Card.Info, is Card.CodeSample ->
+        is Card.Info, is Card.CodeSample, is Card.Heading, is Card.Callout,
+        is Card.ImageCard, is Card.QuoteCard, is Card.Unsupported ->
             VliButton("Продолжить", onClick = vm::continueNext, filled = true, modifier = Modifier.fillMaxWidth().padding(top = 12.dp))
 
         is Card.QuizCard -> when (card.question.variant) {

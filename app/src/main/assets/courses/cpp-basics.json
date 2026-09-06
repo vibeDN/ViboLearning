@@ -2,7 +2,7 @@
   "schema": "vibolearning/v1",
   "id": "cpp-basics",
   "name": "C++ с азов",
-  "accent": "#5AC8E6",
+  "accent": "#3FCF8E",
   "description": "Самые основы: от первой программы до функций",
   "author": "ViboLearning",
   "version": 3,

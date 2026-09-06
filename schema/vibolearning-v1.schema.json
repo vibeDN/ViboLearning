@@ -78,6 +78,16 @@
       "items": {
         "$ref": "#/$defs/module"
       }
+    },
+    "lang": {
+      "description": "Language tag of the content, e.g. \"ru\", \"en\". Informational.",
+      "type": "string",
+      "maxLength": 12
+    },
+    "translationOf": {
+      "description": "id of the course this one is a translation of. Lets a library group language variants.",
+      "type": "string",
+      "maxLength": 64
     }
   },
   "$defs": {
@@ -185,25 +195,67 @@
       }
     },
     "block": {
-      "description": "One card in a lesson.",
+      "description": "One card in a lesson. Known types are validated strictly. An unknown `type` is allowed (reserved for future block types) and should carry a `fallback` block so older renderers can still show something.",
       "type": "object",
       "required": [
         "type"
       ],
-      "oneOf": [
-        {
-          "$ref": "#/$defs/textBlock"
-        },
-        {
-          "$ref": "#/$defs/codeBlock"
-        },
-        {
-          "$ref": "#/$defs/quizBlock"
-        },
-        {
-          "$ref": "#/$defs/practiceBlock"
+      "properties": {
+        "type": {
+          "type": "string"
         }
-      ]
+      },
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "text",
+              "code",
+              "quiz",
+              "practice",
+              "heading",
+              "callout",
+              "image",
+              "quote"
+            ]
+          }
+        }
+      },
+      "then": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/textBlock"
+          },
+          {
+            "$ref": "#/$defs/codeBlock"
+          },
+          {
+            "$ref": "#/$defs/quizBlock"
+          },
+          {
+            "$ref": "#/$defs/practiceBlock"
+          },
+          {
+            "$ref": "#/$defs/headingBlock"
+          },
+          {
+            "$ref": "#/$defs/calloutBlock"
+          },
+          {
+            "$ref": "#/$defs/imageBlock"
+          },
+          {
+            "$ref": "#/$defs/quoteBlock"
+          }
+        ]
+      },
+      "else": {
+        "properties": {
+          "fallback": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      }
     },
     "textBlock": {
       "type": "object",
@@ -489,6 +541,115 @@
           }
         }
       ]
+    },
+    "headingBlock": {
+      "type": "object",
+      "required": [
+        "type",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "heading"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "level": {
+          "description": "1–3. Renderer maps to its own sizes.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        }
+      }
+    },
+    "calloutBlock": {
+      "description": "An aside. The renderer owns the icon and color per variant.",
+      "type": "object",
+      "required": [
+        "type",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "callout"
+        },
+        "variant": {
+          "enum": [
+            "note",
+            "tip",
+            "warning",
+            "important"
+          ],
+          "default": "note"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "text": {
+          "description": "Body. Inline markdown as in `text`.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "imageBlock": {
+      "type": "object",
+      "required": [
+        "type",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "image"
+        },
+        "url": {
+          "description": "https URL or a data: URI. Must be reachable with permissive CORS.",
+          "type": "string",
+          "minLength": 1
+        },
+        "alt": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "caption": {
+          "type": "string",
+          "maxLength": 300
+        }
+      }
+    },
+    "quoteBlock": {
+      "description": "A verbatim excerpt from source material.",
+      "type": "object",
+      "required": [
+        "type",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "quote"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cite": {
+          "description": "Who / what is being quoted.",
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 500
+        }
+      }
     }
   }
 }

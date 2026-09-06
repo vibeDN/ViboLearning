@@ -2,10 +2,10 @@
   "schema": "vibolearning/v1",
   "id": "c-lang",
   "name": "Язык C",
-  "accent": "#A78BFA",
+  "accent": "#2FB47C",
   "description": "Большой курс: от printf до указателей, структур и файлов",
   "author": "ViboLearning",
-  "version": 1,
+  "version": 2,
   "startingHearts": 5,
   "modules": [
     {
@@ -19,9 +19,19 @@
           "xp": 10,
           "blocks": [
             {
+              "type": "heading",
+              "text": "Первая программа",
+              "level": 1
+            },
+            {
               "type": "text",
               "text": "Программа на C начинает выполняться с функции **main**. `#include <stdio.h>` подключает библиотеку ввода-вывода, откуда берётся `printf`.",
               "code": "#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello, world\\n\");\n    return 0;\n}"
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "text": "Каждый оператор в C заканчивается точкой с запятой `;`. Забыл её — ошибка компиляции."
             },
             {
               "type": "text",
@@ -1534,6 +1544,18 @@
               "type": "text",
               "text": "Тип указателя должен совпадать с типом переменной: `int *` указывает на `int`, `char *` — на `char`. `NULL` — «указатель в никуда».",
               "code": "int  *pi;   // указатель на int\nchar *pc;   // указатель на char\nint  *p = NULL;  // пока никуда не указывает"
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Частая ошибка",
+              "text": "Разыменование `*p`, когда `p` равен `NULL` или указывает «в никуда», — это падение программы (segmentation fault). Всегда проверяй указатель перед `*p`."
+            },
+            {
+              "type": "quote",
+              "text": "A pointer is a value that refers to (points to) an object of any type. If the object it points to changes, the pointer keeps pointing at the same location.",
+              "cite": "cppreference — Pointers",
+              "url": "https://en.cppreference.com/w/c/language/pointer"
             },
             {
               "type": "quiz",

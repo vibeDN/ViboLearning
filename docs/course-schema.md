@@ -64,9 +64,13 @@ The next module unlocks only when this one is cleared (all lessons + exam passed
   "name": "Первая программа",  // required
   "order": 1,                   // optional; sorts lessons within the module
   "xp": 10,                     // awarded on completion
+  "kind": "lesson",             // lesson (default) | reading | project | challenge
   "blocks": [ /* Block[] */ ]   // required, ≥1 — the cards the learner swipes through
 }
 ```
+
+`kind` only changes presentation: the path-node icon, and whether hearts apply
+(`reading` = no hearts, just read through).
 
 A lesson is complete when the learner reaches the end. Wrong quiz answers cost a
 heart; running out ends the attempt (retry from the start).
@@ -126,6 +130,34 @@ One graded question shown as its own card. `variant` picks the interaction:
 }
 ```
 
+### `heading`
+A section beat, shown as its own card.
+```jsonc
+{ "type": "heading", "text": "Указатели", "level": 1 }   // level 1–3
+```
+
+### `callout`
+An aside. The renderer owns the icon and color per `variant`.
+```jsonc
+{ "type": "callout", "variant": "warning", "title": "Частая ошибка",
+  "text": "Разыменование `NULL` — это падение программы." }
+// variant: note (default) | tip | warning | important
+```
+
+### `image`
+```jsonc
+{ "type": "image", "url": "https://…/diagram.png", "alt": "…", "caption": "…" }
+```
+URL must be reachable with permissive CORS. (In the claude.ai artifact sandbox
+external images are blocked — use the GitHub Pages build, or a `data:` URI.)
+
+### `quote`
+A verbatim excerpt from source material.
+```jsonc
+{ "type": "quote", "text": "main is the entry point.",
+  "cite": "cppreference — main function", "url": "https://en.cppreference.com/w/c/language/main_function" }
+```
+
 ### `practice`
 Inline drill. The engine auto-builds a matching card (+ multiple choice if there
 are more than four terms) from a term list.
@@ -147,6 +179,19 @@ app-wide **Практика** tab.
 Same shape as a `quiz` block, minus the `"type": "quiz"` line:
 ```jsonc
 { "variant": "single", "prompt": "…", "options": ["…"], "answer": 0, "explanation": "…" }
+```
+
+## Forward compatibility
+
+An unknown block `type` never breaks a course. If it carries a `fallback` block,
+that is rendered instead; otherwise the learner sees a small "needs a newer app"
+card and the rest of the lesson works.
+
+```jsonc
+{
+  "type": "interactive_diagram",           // a future block type
+  "fallback": { "type": "image", "url": "https://…/diagram.png" }
+}
 ```
 
 ## What import checks
