@@ -45,7 +45,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "С какой функции начинается выполнение программы на C++?",
-              "options": ["start()", "main()", "run()", "begin()"],
+              "options": [
+                "start()",
+                "main()",
+                "run()",
+                "begin()"
+              ],
               "answer": 1,
               "explanation": "Точка входа в программу — всегда `main()`."
             },
@@ -54,7 +59,9 @@
               "variant": "type",
               "prompt": "Какой поток выводит текст на экран? Впиши пропущенное.",
               "code": "___ << \"Hi\" << endl;",
-              "answer": ["cout"],
+              "answer": [
+                "cout"
+              ],
               "explanation": "`cout` — стандартный поток вывода (console output)."
             }
           ]
@@ -91,7 +98,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой тип подойдёт для хранения числа 3.14?",
-              "options": ["int", "char", "double", "bool"],
+              "options": [
+                "int",
+                "char",
+                "double",
+                "bool"
+              ],
               "answer": 2,
               "explanation": "`double` хранит числа с плавающей точкой."
             },
@@ -105,17 +117,32 @@
                 "char c = 'z';",
                 "bool ok = yes;"
               ],
-              "answer": [0, 2],
+              "answer": [
+                0,
+                2
+              ],
               "explanation": "Имя не может начинаться с цифры, а значение bool — это true/false, не yes."
             },
             {
               "type": "practice",
               "prompt": "Сопоставь тип и то, что он хранит",
               "terms": [
-                { "display": "int", "meaning": "Целые числа" },
-                { "display": "double", "meaning": "Числа с дробной частью" },
-                { "display": "char", "meaning": "Один символ" },
-                { "display": "bool", "meaning": "Истину или ложь" }
+                {
+                  "display": "int",
+                  "meaning": "Целые числа"
+                },
+                {
+                  "display": "double",
+                  "meaning": "Числа с дробной частью"
+                },
+                {
+                  "display": "char",
+                  "meaning": "Один символ"
+                },
+                {
+                  "display": "bool",
+                  "meaning": "Истину или ложь"
+                }
               ]
             }
           ]
@@ -147,7 +174,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Чему равно 17 % 5?",
-              "options": ["2", "3", "3.4", "12"],
+              "options": [
+                "2",
+                "3",
+                "3.4",
+                "12"
+              ],
               "answer": 0,
               "explanation": "17 = 3·5 + 2, остаток равен 2."
             },
@@ -156,7 +188,9 @@
               "variant": "type",
               "prompt": "Какой оператор считывает значение с клавиатуры? Впиши пропущенное.",
               "code": "cin ___ x;",
-              "answer": [">>"],
+              "answer": [
+                ">>"
+              ],
               "explanation": "`cin >> x;` — извлечение из потока ввода."
             }
           ]
@@ -181,28 +215,53 @@
           {
             "variant": "single",
             "prompt": "Что выведет cout << 10 / 4; для целых чисел?",
-            "options": ["2.5", "2", "3", "2.0"],
+            "options": [
+              "2.5",
+              "2",
+              "3",
+              "2.0"
+            ],
             "answer": 1,
             "explanation": "Деление двух int даёт int: дробная часть отбрасывается."
           },
           {
             "variant": "multiple",
             "prompt": "Что из этого — корректные имена переменных?",
-            "options": ["total_sum", "1st", "userAge", "float"],
-            "answer": [0, 2],
+            "options": [
+              "total_sum",
+              "1st",
+              "userAge",
+              "float"
+            ],
+            "answer": [
+              0,
+              2
+            ],
             "explanation": "Нельзя начинать с цифры и нельзя использовать ключевые слова."
           },
           {
             "variant": "type",
             "prompt": "Каким значением main сообщает об успешном завершении? Впиши пропущенное.",
             "code": "int main() {\n    ...\n    return ___;\n}",
-            "answer": ["0"]
+            "answer": [
+              "0"
+            ]
           },
           {
             "variant": "order",
             "prompt": "Расставь строки минимальной программы по порядку",
-            "items": ["#include <iostream>", "int main() {", "    return 0;", "}"],
-            "answer": [0, 1, 2, 3]
+            "items": [
+              "#include <iostream>",
+              "int main() {",
+              "    return 0;",
+              "}"
+            ],
+            "answer": [
+              0,
+              1,
+              2,
+              3
+            ]
           }
         ]
       }
@@ -234,7 +293,12 @@
               "variant": "single",
               "prompt": "Что напечатает этот код?",
               "code": "int score = 95;\nif (score >= 90)       cout << \"Отлично\";\nelse if (score >= 60)  cout << \"Нормально\";\nelse                   cout << \"Ещё поучись\";",
-              "options": ["Отлично", "Нормально", "Ещё поучись", "Ничего"],
+              "options": [
+                "Отлично",
+                "Нормально",
+                "Ещё поучись",
+                "Ничего"
+              ],
               "answer": 0,
               "explanation": "Первое же истинное условие (score >= 90) прерывает цепочку."
             },
@@ -242,7 +306,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Оператор сравнения «равно» в условии — это...",
-              "options": ["=", "==", ":=", "==="],
+              "options": [
+                "=",
+                "==",
+                ":=",
+                "==="
+              ],
               "answer": 1,
               "explanation": "Одиночное `=` — присваивание, для сравнения нужно `==`."
             }
@@ -269,7 +338,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Чему равно (5 > 3) || (2 > 4)?",
-              "options": ["true", "false", "5", "ошибка"],
+              "options": [
+                "true",
+                "false",
+                "5",
+                "ошибка"
+              ],
               "answer": 0,
               "explanation": "Для `||` достаточно одного истинного операнда, а 5 > 3 истинно."
             },
@@ -277,10 +351,22 @@
               "type": "practice",
               "prompt": "Сопоставь оператор и смысл",
               "terms": [
-                { "display": "&&", "meaning": "Истинно, если оба условия истинны" },
-                { "display": "||", "meaning": "Истинно, если хотя бы одно условие истинно" },
-                { "display": "!", "meaning": "Меняет истину на ложь и наоборот" },
-                { "display": "==", "meaning": "Проверяет равенство двух значений" }
+                {
+                  "display": "&&",
+                  "meaning": "Истинно, если оба условия истинны"
+                },
+                {
+                  "display": "||",
+                  "meaning": "Истинно, если хотя бы одно условие истинно"
+                },
+                {
+                  "display": "!",
+                  "meaning": "Меняет истину на ложь и наоборот"
+                },
+                {
+                  "display": "==",
+                  "meaning": "Проверяет равенство двух значений"
+                }
               ]
             }
           ]
@@ -306,7 +392,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Сколько раз выполнится тело: for (int i = 0; i < 3; i++)?",
-              "options": ["2", "3", "4", "бесконечно"],
+              "options": [
+                "2",
+                "3",
+                "4",
+                "бесконечно"
+              ],
               "answer": 1,
               "explanation": "i принимает значения 0, 1, 2 — три итерации."
             },
@@ -314,8 +405,16 @@
               "type": "quiz",
               "variant": "order",
               "prompt": "Расставь части заголовка for по порядку",
-              "items": ["int i = 0", "i < n", "i++"],
-              "answer": [0, 1, 2],
+              "items": [
+                "int i = 0",
+                "i < n",
+                "i++"
+              ],
+              "answer": [
+                0,
+                1,
+                2
+              ],
               "explanation": "Инициализация; условие; шаг."
             }
           ]
@@ -340,27 +439,46 @@
           {
             "variant": "single",
             "prompt": "Чему равно !(true && false)?",
-            "options": ["true", "false", "0", "ошибка компиляции"],
+            "options": [
+              "true",
+              "false",
+              "0",
+              "ошибка компиляции"
+            ],
             "answer": 0,
             "explanation": "true && false = false, а !false = true."
           },
           {
             "variant": "single",
             "prompt": "Что выведет: for (int i = 3; i > 0; i--) cout << i;",
-            "options": ["123", "321", "0123", "3210"],
+            "options": [
+              "123",
+              "321",
+              "0123",
+              "3210"
+            ],
             "answer": 1
           },
           {
             "variant": "multiple",
             "prompt": "Какие циклы гарантированно выполнят тело хотя бы один раз?",
-            "options": ["while", "do ... while", "for", "никакой"],
-            "answer": [1],
+            "options": [
+              "while",
+              "do ... while",
+              "for",
+              "никакой"
+            ],
+            "answer": [
+              1
+            ],
             "explanation": "У do-while проверка условия стоит после тела."
           },
           {
             "variant": "type",
             "prompt": "Каким ключевым словом досрочно выйти из цикла?",
-            "answer": ["break"]
+            "answer": [
+              "break"
+            ]
           }
         ]
       }
@@ -391,14 +509,24 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой индекс у первого элемента массива?",
-              "options": ["1", "0", "-1", "зависит от типа"],
+              "options": [
+                "1",
+                "0",
+                "-1",
+                "зависит от типа"
+              ],
               "answer": 1
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "int a[4]; — сколько элементов помещается в массив?",
-              "options": ["3", "4", "5", "любое"],
+              "options": [
+                "3",
+                "4",
+                "5",
+                "любое"
+              ],
               "answer": 1,
               "explanation": "Число в скобках — размер; индексы при этом от 0 до 3."
             }
@@ -426,7 +554,9 @@
               "variant": "type",
               "prompt": "Обращение к i-му элементу массива a. Впиши пропущенное.",
               "code": "int x = a___;",
-              "answer": ["[i]"],
+              "answer": [
+                "[i]"
+              ],
               "explanation": "Квадратные скобки с индексом: `a[i]`."
             }
           ]
@@ -470,10 +600,22 @@
               "type": "practice",
               "prompt": "Сопоставь символ и его роль с указателями",
               "terms": [
-                { "display": "&x", "meaning": "Адрес переменной x" },
-                { "display": "*p", "meaning": "Значение по адресу, хранящемуся в p" },
-                { "display": "int* p", "meaning": "Объявление указателя на int" },
-                { "display": "int& r", "meaning": "Ссылка — второе имя переменной" }
+                {
+                  "display": "&x",
+                  "meaning": "Адрес переменной x"
+                },
+                {
+                  "display": "*p",
+                  "meaning": "Значение по адресу, хранящемуся в p"
+                },
+                {
+                  "display": "int* p",
+                  "meaning": "Объявление указателя на int"
+                },
+                {
+                  "display": "int& r",
+                  "meaning": "Ссылка — второе имя переменной"
+                }
               ]
             }
           ]
@@ -487,7 +629,12 @@
           {
             "variant": "single",
             "prompt": "int a[6]; — какой индекс у последнего элемента?",
-            "options": ["6", "5", "7", "0"],
+            "options": [
+              "6",
+              "5",
+              "7",
+              "0"
+            ],
             "answer": 1
           },
           {
@@ -504,7 +651,12 @@
           {
             "variant": "single",
             "prompt": "После int x = 1; int* p = &x; *p = 9; чему равно x?",
-            "options": ["1", "9", "адрес x", "0"],
+            "options": [
+              "1",
+              "9",
+              "адрес x",
+              "0"
+            ],
             "answer": 1,
             "explanation": "Через *p мы записали 9 прямо в x."
           },
@@ -517,13 +669,24 @@
               "Все элементы одного типа",
               "a[0] — последний элемент"
             ],
-            "answer": [0, 2]
+            "answer": [
+              0,
+              2
+            ]
           },
           {
             "variant": "order",
             "prompt": "Расставь шаги: получить значение x через указатель",
-            "items": ["int x = 5;", "int* p = &x;", "cout << *p;"],
-            "answer": [0, 1, 2]
+            "items": [
+              "int x = 5;",
+              "int* p = &x;",
+              "cout << *p;"
+            ],
+            "answer": [
+              0,
+              1,
+              2
+            ]
           }
         ]
       }
@@ -554,7 +717,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой тип у функции, которая ничего не возвращает?",
-              "options": ["int", "empty", "void", "null"],
+              "options": [
+                "int",
+                "empty",
+                "void",
+                "null"
+              ],
               "answer": 2
             }
           ]
@@ -581,14 +749,21 @@
               "variant": "type",
               "prompt": "Каким словом функция отдаёт результат? Впиши пропущенное.",
               "code": "int square(int n) {\n    ___ n * n;\n}",
-              "answer": ["return"]
+              "answer": [
+                "return"
+              ]
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "Что выведет этот код?",
               "code": "int square(int n) { return n * n; }\n\ncout << square(3) + square(4);",
-              "options": ["7", "12", "25", "49"],
+              "options": [
+                "7",
+                "12",
+                "25",
+                "49"
+              ],
               "answer": 2,
               "explanation": "9 + 16 = 25."
             }
@@ -628,10 +803,22 @@
               "type": "practice",
               "prompt": "Сопоставь понятие и его смысл",
               "terms": [
-                { "display": "параметр", "meaning": "Входные данные функции" },
-                { "display": "return", "meaning": "Возвращает результат и выходит из функции" },
-                { "display": "void", "meaning": "Функция не возвращает значения" },
-                { "display": "int& x", "meaning": "Параметр по ссылке — работа с оригиналом" }
+                {
+                  "display": "параметр",
+                  "meaning": "Входные данные функции"
+                },
+                {
+                  "display": "return",
+                  "meaning": "Возвращает результат и выходит из функции"
+                },
+                {
+                  "display": "void",
+                  "meaning": "Функция не возвращает значения"
+                },
+                {
+                  "display": "int& x",
+                  "meaning": "Параметр по ссылке — работа с оригиналом"
+                }
               ]
             }
           ]
@@ -656,14 +843,24 @@
           {
             "variant": "single",
             "prompt": "void f(int x) { x = 0; } — изменит ли вызов f(a) переменную a снаружи?",
-            "options": ["Да", "Нет", "Только если a == 0", "Будет ошибка"],
+            "options": [
+              "Да",
+              "Нет",
+              "Только если a == 0",
+              "Будет ошибка"
+            ],
             "answer": 1,
             "explanation": "Без & параметр — копия."
           },
           {
             "variant": "single",
             "prompt": "int sum(int a, int b) { return a + b; } — что вернёт sum(2, 3)?",
-            "options": ["23", "5", "6", "ничего"],
+            "options": [
+              "23",
+              "5",
+              "6",
+              "ничего"
+            ],
             "answer": 1
           },
           {
@@ -675,16 +872,32 @@
               "Можно вызывать много раз",
               "void-функция возвращает 0"
             ],
-            "answer": [0, 2]
+            "answer": [
+              0,
+              2
+            ]
           },
           {
             "variant": "order",
             "prompt": "Собери функцию, возвращающую куб числа",
-            "items": ["int cube(int n) {", "    return n * n * n;", "}"],
-            "answer": [0, 1, 2]
+            "items": [
+              "int cube(int n) {",
+              "    return n * n * n;",
+              "}"
+            ],
+            "answer": [
+              0,
+              1,
+              2
+            ]
           }
         ]
       }
     }
-  ]
+  ],
+  "lang": "ru",
+  "source": {
+    "title": "cppreference — Language basics",
+    "url": "https://en.cppreference.com/w/cpp/language"
+  }
 }

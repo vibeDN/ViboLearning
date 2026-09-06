@@ -4,7 +4,11 @@
   "title": "ViboLearning course",
   "description": "A single self-contained course. A ViboLearning runtime (Android, web) reads this file and renders it as an interactive course: a path of lesson nodes, swipeable lesson cards, quizzes, per-module checkpoints, hearts, XP and streaks. No AI is involved at runtime — any model may generate this document from source material.",
   "type": "object",
-  "required": ["schema", "name", "modules"],
+  "required": [
+    "schema",
+    "name",
+    "modules"
+  ],
   "additionalProperties": true,
   "properties": {
     "schema": {
@@ -18,15 +22,27 @@
       "minLength": 1,
       "maxLength": 64
     },
-    "name": { "type": "string", "minLength": 1, "maxLength": 120 },
-    "description": { "type": "string", "maxLength": 400 },
-    "iconUrl": { "type": "string", "format": "uri" },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 400
+    },
+    "iconUrl": {
+      "type": "string"
+    },
     "accent": {
       "description": "Accent color as #RRGGBB. Falls back to the app default.",
       "type": "string",
       "pattern": "^#[0-9a-fA-F]{6}$"
     },
-    "author": { "type": "string", "maxLength": 120 },
+    "author": {
+      "type": "string",
+      "maxLength": 120
+    },
     "version": {
       "description": "Content version. Bump on re-publish; re-import refreshes content and keeps progress.",
       "type": "integer",
@@ -43,26 +59,46 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "title": { "type": "string", "maxLength": 200 },
-        "url": { "type": "string", "format": "uri" },
-        "note": { "type": "string", "maxLength": 400 }
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 400
+        }
       }
     },
     "modules": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/module" }
+      "items": {
+        "$ref": "#/$defs/module"
+      }
     }
   },
-
   "$defs": {
     "module": {
       "type": "object",
-      "required": ["name", "lessons"],
+      "required": [
+        "name",
+        "lessons"
+      ],
       "additionalProperties": true,
       "properties": {
-        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
-        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
         "order": {
           "description": "Sort key. Omit to use file order.",
           "type": "integer"
@@ -74,20 +110,36 @@
         "lessons": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/lesson" }
+          "items": {
+            "$ref": "#/$defs/lesson"
+          }
         },
-        "exam": { "$ref": "#/$defs/exam" }
+        "exam": {
+          "$ref": "#/$defs/exam"
+        }
       }
     },
-
     "lesson": {
       "type": "object",
-      "required": ["name", "blocks"],
+      "required": [
+        "name",
+        "blocks"
+      ],
       "additionalProperties": true,
       "properties": {
-        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
-        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
-        "order": { "type": "integer" },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "order": {
+          "type": "integer"
+        },
         "xp": {
           "description": "XP awarded on completion (default 10).",
           "type": "integer",
@@ -96,50 +148,74 @@
         "blocks": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/block" }
+          "items": {
+            "$ref": "#/$defs/block"
+          }
         }
       }
     },
-
     "exam": {
       "description": "End-of-module checkpoint ('контрольные вопросы'). Clearing it unlocks the next module.",
       "type": "object",
-      "required": ["questions"],
+      "required": [
+        "questions"
+      ],
       "additionalProperties": true,
       "properties": {
-        "title": { "type": "string", "maxLength": 120 },
+        "title": {
+          "type": "string",
+          "maxLength": 120
+        },
         "passScore": {
           "description": "Minimum correct answers to pass. 0 = just finish with a heart left.",
           "type": "integer",
           "minimum": 0
         },
-        "xp": { "type": "integer", "minimum": 0 },
+        "xp": {
+          "type": "integer",
+          "minimum": 0
+        },
         "questions": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/question" }
+          "items": {
+            "$ref": "#/$defs/question"
+          }
         }
       }
     },
-
     "block": {
       "description": "One card in a lesson.",
       "type": "object",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "oneOf": [
-        { "$ref": "#/$defs/textBlock" },
-        { "$ref": "#/$defs/codeBlock" },
-        { "$ref": "#/$defs/quizBlock" },
-        { "$ref": "#/$defs/practiceBlock" }
+        {
+          "$ref": "#/$defs/textBlock"
+        },
+        {
+          "$ref": "#/$defs/codeBlock"
+        },
+        {
+          "$ref": "#/$defs/quizBlock"
+        },
+        {
+          "$ref": "#/$defs/practiceBlock"
+        }
       ]
     },
-
     "textBlock": {
       "type": "object",
-      "required": ["type", "text"],
+      "required": [
+        "type",
+        "text"
+      ],
       "additionalProperties": false,
       "properties": {
-        "type": { "const": "text" },
+        "type": {
+          "const": "text"
+        },
         "text": {
           "description": "Prose. Inline markdown: **bold**, *italic* / _italic_, `code`.",
           "type": "string",
@@ -155,19 +231,29 @@
         }
       }
     },
-
     "codeBlock": {
       "type": "object",
-      "required": ["type", "code"],
+      "required": [
+        "type",
+        "code"
+      ],
       "additionalProperties": false,
       "properties": {
-        "type": { "const": "code" },
-        "code": { "type": "string", "minLength": 1 },
+        "type": {
+          "const": "code"
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
         "language": {
           "description": "For the online compiler: cpp | c | python. Other values just tag the snippet.",
           "type": "string"
         },
-        "editable": { "type": "boolean", "default": true },
+        "editable": {
+          "type": "boolean",
+          "default": true
+        },
         "runnable": {
           "description": "Adds a Run button. Compiles online (wandbox.org); falls back to `output` when offline.",
           "type": "boolean",
@@ -177,54 +263,98 @@
           "description": "Expected stdout, shown when no compiler is reachable. Strongly recommended.",
           "type": "string"
         },
-        "caption": { "type": "string", "maxLength": 200 }
+        "caption": {
+          "type": "string",
+          "maxLength": 200
+        }
       }
     },
-
     "quizBlock": {
       "allOf": [
-        { "$ref": "#/$defs/question" },
+        {
+          "$ref": "#/$defs/question"
+        },
         {
           "type": "object",
-          "required": ["type"],
-          "properties": { "type": { "const": "quiz" } }
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "quiz"
+            }
+          }
         }
       ]
     },
-
     "practiceBlock": {
       "description": "Inline drill. The engine auto-builds a matching card (+ multiple-choice for >4 terms) from the term list. Terms also feed the module practice node and the app-wide Practice tab.",
       "type": "object",
-      "required": ["type", "terms"],
+      "required": [
+        "type",
+        "terms"
+      ],
       "additionalProperties": false,
       "properties": {
-        "type": { "const": "practice" },
-        "prompt": { "type": "string", "maxLength": 200 },
+        "type": {
+          "const": "practice"
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 200
+        },
         "terms": {
           "type": "array",
           "minItems": 2,
           "items": {
             "type": "object",
-            "required": ["display", "meaning"],
+            "required": [
+              "display",
+              "meaning"
+            ],
             "additionalProperties": false,
             "properties": {
-              "display": { "type": "string", "minLength": 1, "maxLength": 80 },
-              "meaning": { "type": "string", "minLength": 1, "maxLength": 200 }
+              "display": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "meaning": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
             }
           }
         }
       }
     },
-
     "question": {
       "description": "A graded question. Used as a `quiz` block inside a lesson and as an item inside an exam.",
       "type": "object",
-      "required": ["variant", "prompt", "answer"],
+      "required": [
+        "variant",
+        "prompt",
+        "answer"
+      ],
       "additionalProperties": false,
       "properties": {
-        "type": { "const": "quiz" },
-        "variant": { "enum": ["single", "multiple", "type", "order"] },
-        "prompt": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "type": {
+          "const": "quiz"
+        },
+        "variant": {
+          "enum": [
+            "single",
+            "multiple",
+            "type",
+            "order"
+          ]
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
         "code": {
           "description": "Optional code shown above the question.",
           "type": "string"
@@ -232,66 +362,128 @@
         "options": {
           "description": "Choices for single / multiple.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "items": {
           "description": "Fragments to arrange, for the `order` variant.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "answer": {
           "description": "single: integer index. multiple: array of integer indices. type: array of accepted strings (case-insensitive). order: array of `items` indices in correct order."
         },
-        "explanation": { "type": "string", "maxLength": 400 }
+        "explanation": {
+          "type": "string",
+          "maxLength": 400
+        }
       },
       "allOf": [
         {
-          "if": { "properties": { "variant": { "const": "single" } } },
-          "then": {
-            "required": ["options"],
+          "if": {
             "properties": {
-              "options": { "minItems": 2 },
-              "answer": { "type": "integer", "minimum": 0 }
+              "variant": {
+                "const": "single"
+              }
             }
-          }
-        },
-        {
-          "if": { "properties": { "variant": { "const": "multiple" } } },
+          },
           "then": {
-            "required": ["options"],
+            "required": [
+              "options"
+            ],
             "properties": {
-              "options": { "minItems": 2 },
+              "options": {
+                "minItems": 2
+              },
               "answer": {
-                "type": "array",
-                "minItems": 1,
-                "items": { "type": "integer", "minimum": 0 }
+                "type": "integer",
+                "minimum": 0
               }
             }
           }
         },
         {
-          "if": { "properties": { "variant": { "const": "type" } } },
+          "if": {
+            "properties": {
+              "variant": {
+                "const": "multiple"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "options"
+            ],
+            "properties": {
+              "options": {
+                "minItems": 2
+              },
+              "answer": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "variant": {
+                "const": "type"
+              }
+            }
+          },
           "then": {
             "properties": {
               "answer": {
                 "oneOf": [
-                  { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-                  { "type": "string", "minLength": 1 }
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  }
                 ]
               }
             }
           }
         },
         {
-          "if": { "properties": { "variant": { "const": "order" } } },
-          "then": {
-            "required": ["items"],
+          "if": {
             "properties": {
-              "items": { "minItems": 2 },
+              "variant": {
+                "const": "order"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "items"
+            ],
+            "properties": {
+              "items": {
+                "minItems": 2
+              },
               "answer": {
                 "type": "array",
                 "minItems": 2,
-                "items": { "type": "integer", "minimum": 0 }
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
               }
             }
           }

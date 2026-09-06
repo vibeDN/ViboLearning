@@ -40,7 +40,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "С какой функции начинается выполнение программы на C?",
-              "options": ["start", "printf", "main", "begin"],
+              "options": [
+                "start",
+                "printf",
+                "main",
+                "begin"
+              ],
               "answer": 2,
               "explanation": "Точка входа — всегда `main`."
             },
@@ -49,14 +54,21 @@
               "variant": "type",
               "prompt": "Какая функция печатает текст на экран? Впиши пропущенное.",
               "code": "___(\"Hi\\n\");",
-              "answer": ["printf"],
+              "answer": [
+                "printf"
+              ],
               "explanation": "`printf` — от print formatted."
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "Что делает `\\n` внутри строки?",
-              "options": ["Печатает букву n", "Переводит строку", "Ставит пробел", "Завершает программу"],
+              "options": [
+                "Печатает букву n",
+                "Переводит строку",
+                "Ставит пробел",
+                "Завершает программу"
+              ],
               "answer": 1
             }
           ]
@@ -83,7 +95,12 @@
               "variant": "single",
               "prompt": "Что выведет этот код?",
               "code": "printf(\"1\");\nprintf(\"2\");\nprintf(\"3\\n\");",
-              "options": ["1\\n2\\n3", "123", "1 2 3", "ошибка"],
+              "options": [
+                "1\\n2\\n3",
+                "123",
+                "1 2 3",
+                "ошибка"
+              ],
               "answer": 1,
               "explanation": "Перевод строки только один — в конце."
             },
@@ -92,7 +109,9 @@
               "variant": "type",
               "prompt": "Какой спецсимвол делает табуляцию? Впиши.",
               "code": "printf(\"имя___фамилия\");",
-              "answer": ["\\t"],
+              "answer": [
+                "\\t"
+              ],
               "explanation": "`\\t` — горизонтальная табуляция."
             }
           ]
@@ -116,17 +135,37 @@
               "type": "quiz",
               "variant": "multiple",
               "prompt": "Что из этого — комментарии в C?",
-              "options": ["// текст", "# текст", "/* текст */", "<!-- текст -->"],
-              "answer": [0, 2]
+              "options": [
+                "// текст",
+                "# текст",
+                "/* текст */",
+                "<!-- текст -->"
+              ],
+              "answer": [
+                0,
+                2
+              ]
             },
             {
               "type": "practice",
               "prompt": "Сопоставь элемент программы и его роль",
               "terms": [
-                { "display": "#include <stdio.h>", "meaning": "Подключает функции ввода-вывода" },
-                { "display": "int main(void)", "meaning": "Точка входа в программу" },
-                { "display": "printf", "meaning": "Печатает текст на экран" },
-                { "display": "return 0;", "meaning": "Успешное завершение программы" }
+                {
+                  "display": "#include <stdio.h>",
+                  "meaning": "Подключает функции ввода-вывода"
+                },
+                {
+                  "display": "int main(void)",
+                  "meaning": "Точка входа в программу"
+                },
+                {
+                  "display": "printf",
+                  "meaning": "Печатает текст на экран"
+                },
+                {
+                  "display": "return 0;",
+                  "meaning": "Успешное завершение программы"
+                }
               ]
             }
           ]
@@ -151,14 +190,21 @@
           {
             "variant": "single",
             "prompt": "Что выведет printf(\"A\\nB\");?",
-            "options": ["A\\nB одной строкой", "A и B на разных строках", "AB", "ошибка"],
+            "options": [
+              "A\\nB одной строкой",
+              "A и B на разных строках",
+              "AB",
+              "ошибка"
+            ],
             "answer": 1
           },
           {
             "variant": "type",
             "prompt": "Каким числом main сообщает об успешном завершении? Впиши пропущенное.",
             "code": "int main(void) {\n    return ___;\n}",
-            "answer": ["0"]
+            "answer": [
+              "0"
+            ]
           },
           {
             "variant": "multiple",
@@ -169,13 +215,27 @@
               "// начинает многострочный комментарий",
               "Тело функции — в фигурных скобках"
             ],
-            "answer": [0, 1, 3]
+            "answer": [
+              0,
+              1,
+              3
+            ]
           },
           {
             "variant": "order",
             "prompt": "Расставь строки минимальной программы",
-            "items": ["#include <stdio.h>", "int main(void) {", "    return 0;", "}"],
-            "answer": [0, 1, 2, 3]
+            "items": [
+              "#include <stdio.h>",
+              "int main(void) {",
+              "    return 0;",
+              "}"
+            ],
+            "answer": [
+              0,
+              1,
+              2,
+              3
+            ]
           }
         ]
       }
@@ -207,15 +267,25 @@
               "variant": "type",
               "prompt": "Какой спецификатор printf для целого числа? Впиши.",
               "code": "printf(\"%___\", count);",
-              "answer": ["d"],
+              "answer": [
+                "d"
+              ],
               "explanation": "`%d` — decimal integer."
             },
             {
               "type": "quiz",
               "variant": "multiple",
               "prompt": "Какие объявления корректны?",
-              "options": ["int count = 10;", "int 2x = 4;", "int total;", "int = 5;"],
-              "answer": [0, 2],
+              "options": [
+                "int count = 10;",
+                "int 2x = 4;",
+                "int total;",
+                "int = 5;"
+              ],
+              "answer": [
+                0,
+                2
+              ],
               "explanation": "Имя не может начинаться с цифры и не может отсутствовать."
             }
           ]
@@ -248,14 +318,24 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой тип выбрать для числа 3.14159?",
-              "options": ["int", "char", "double", "void"],
+              "options": [
+                "int",
+                "char",
+                "double",
+                "void"
+              ],
               "answer": 2
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "Что напечатает printf(\"%.1f\", 2.0/3.0);?",
-              "options": ["0", "0.7", "0.6", "0.67"],
+              "options": [
+                "0",
+                "0.7",
+                "0.6",
+                "0.67"
+              ],
               "answer": 1,
               "explanation": "0.666... округляется до одного знака → 0.7."
             }
@@ -282,7 +362,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Что выведет printf(\"%d\", 'A' + 1);?",
-              "options": ["A1", "B", "66", "ошибка"],
+              "options": [
+                "A1",
+                "B",
+                "66",
+                "ошибка"
+              ],
               "answer": 2,
               "explanation": "'A' это 65, плюс 1 — 66. Со спецификатором %d печатается число."
             },
@@ -290,10 +375,22 @@
               "type": "practice",
               "prompt": "Сопоставь тип и то, что он хранит",
               "terms": [
-                { "display": "int", "meaning": "Целые числа" },
-                { "display": "double", "meaning": "Дробные числа (высокая точность)" },
-                { "display": "char", "meaning": "Один символ / его код" },
-                { "display": "const", "meaning": "Запрет на изменение значения" }
+                {
+                  "display": "int",
+                  "meaning": "Целые числа"
+                },
+                {
+                  "display": "double",
+                  "meaning": "Дробные числа (высокая точность)"
+                },
+                {
+                  "display": "char",
+                  "meaning": "Один символ / его код"
+                },
+                {
+                  "display": "const",
+                  "meaning": "Запрет на изменение значения"
+                }
               ]
             }
           ]
@@ -307,19 +404,34 @@
           {
             "variant": "single",
             "prompt": "Какой спецификатор printf для типа double?",
-            "options": ["%d", "%c", "%f", "%s"],
+            "options": [
+              "%d",
+              "%c",
+              "%f",
+              "%s"
+            ],
             "answer": 2
           },
           {
             "variant": "single",
             "prompt": "Чему обычно равно sizeof(int) на 64-битной системе?",
-            "options": ["1", "2", "4", "8"],
+            "options": [
+              "1",
+              "2",
+              "4",
+              "8"
+            ],
             "answer": 2
           },
           {
             "variant": "single",
             "prompt": "Что означает 'A' в C?",
-            "options": ["Строку из одной буквы", "Символ, то есть его числовой код", "Имя переменной", "Ошибку"],
+            "options": [
+              "Строку из одной буквы",
+              "Символ, то есть его числовой код",
+              "Имя переменной",
+              "Ошибку"
+            ],
             "answer": 1
           },
           {
@@ -331,13 +443,19 @@
               "const-переменную можно переприсвоить",
               "double точнее float"
             ],
-            "answer": [0, 1, 3]
+            "answer": [
+              0,
+              1,
+              3
+            ]
           },
           {
             "variant": "type",
             "prompt": "Каким ключевым словом сделать переменную неизменяемой? Впиши пропущенное.",
             "code": "___ int LIMIT = 100;",
-            "answer": ["const"]
+            "answer": [
+              "const"
+            ]
           }
         ]
       }
@@ -367,7 +485,9 @@
               "variant": "type",
               "prompt": "Что обязательно поставить перед именем переменной в scanf? Впиши один символ.",
               "code": "scanf(\"%d\", ___x);",
-              "answer": ["&"],
+              "answer": [
+                "&"
+              ],
               "explanation": "`&x` — адрес переменной x."
             },
             {
@@ -405,14 +525,24 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Чему равно 17 % 5?",
-              "options": ["2", "3", "3.4", "12"],
+              "options": [
+                "2",
+                "3",
+                "3.4",
+                "12"
+              ],
               "answer": 0
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "Что выведет printf(\"%d\", 10 / 4);?",
-              "options": ["2.5", "2", "3", "2.5000"],
+              "options": [
+                "2.5",
+                "2",
+                "3",
+                "2.5000"
+              ],
               "answer": 1,
               "explanation": "Деление двух int даёт int."
             }
@@ -439,7 +569,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Чему равно x после: int x = 4; x *= 3; x -= 2;",
-              "options": ["10", "12", "14", "5"],
+              "options": [
+                "10",
+                "12",
+                "14",
+                "5"
+              ],
               "answer": 0,
               "explanation": "4·3 = 12, затем 12 − 2 = 10."
             },
@@ -447,10 +582,22 @@
               "type": "practice",
               "prompt": "Сопоставь оператор и смысл",
               "terms": [
-                { "display": "%", "meaning": "Остаток от деления" },
-                { "display": "x++", "meaning": "Увеличить x на 1" },
-                { "display": "x += 5", "meaning": "То же, что x = x + 5" },
-                { "display": "(double)x", "meaning": "Временно рассматривать x как double" }
+                {
+                  "display": "%",
+                  "meaning": "Остаток от деления"
+                },
+                {
+                  "display": "x++",
+                  "meaning": "Увеличить x на 1"
+                },
+                {
+                  "display": "x += 5",
+                  "meaning": "То же, что x = x + 5"
+                },
+                {
+                  "display": "(double)x",
+                  "meaning": "Временно рассматривать x как double"
+                }
               ]
             }
           ]
@@ -465,12 +612,19 @@
             "variant": "type",
             "prompt": "Какой символ ставят перед переменной в scanf? Впиши.",
             "code": "scanf(\"%d\", ___n);",
-            "answer": ["&"]
+            "answer": [
+              "&"
+            ]
           },
           {
             "variant": "single",
             "prompt": "Что выведет printf(\"%d\", 20 / 6);?",
-            "options": ["3.33", "3", "4", "2"],
+            "options": [
+              "3.33",
+              "3",
+              "4",
+              "2"
+            ],
             "answer": 1
           },
           {
@@ -487,7 +641,12 @@
           {
             "variant": "single",
             "prompt": "Чему равно x после: int x = 5; x += 10;",
-            "options": ["5", "10", "15", "50"],
+            "options": [
+              "5",
+              "10",
+              "15",
+              "50"
+            ],
             "answer": 2
           },
           {
@@ -499,7 +658,11 @@
               "x++ увеличивает x на 1",
               "+= умножает"
             ],
-            "answer": [0, 1, 2]
+            "answer": [
+              0,
+              1,
+              2
+            ]
           }
         ]
       }
@@ -531,14 +694,24 @@
               "variant": "single",
               "prompt": "Что напечатает этот код?",
               "code": "int score = 55;\nif (score >= 90)      printf(\"A\");\nelse if (score >= 60) printf(\"B\");\nelse                  printf(\"C\");",
-              "options": ["A", "B", "C", "ничего"],
+              "options": [
+                "A",
+                "B",
+                "C",
+                "ничего"
+              ],
               "answer": 2
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "Оператор сравнения «равно» в условии — это...",
-              "options": ["=", "==", ":=", "==="],
+              "options": [
+                "=",
+                "==",
+                ":=",
+                "==="
+              ],
               "answer": 1
             }
           ]
@@ -563,7 +736,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Чему равно (3 > 5) || (10 != 10)?",
-              "options": ["1", "0", "true", "ошибка"],
+              "options": [
+                "1",
+                "0",
+                "true",
+                "ошибка"
+              ],
               "answer": 1,
               "explanation": "Оба операнда ложны → 0."
             },
@@ -571,10 +749,22 @@
               "type": "practice",
               "prompt": "Сопоставь оператор и смысл",
               "terms": [
-                { "display": "&&", "meaning": "Истинно, если оба условия истинны" },
-                { "display": "||", "meaning": "Истинно, если хотя бы одно условие истинно" },
-                { "display": "!", "meaning": "Меняет истину на ложь и наоборот" },
-                { "display": "!=", "meaning": "Проверяет неравенство двух значений" }
+                {
+                  "display": "&&",
+                  "meaning": "Истинно, если оба условия истинны"
+                },
+                {
+                  "display": "||",
+                  "meaning": "Истинно, если хотя бы одно условие истинно"
+                },
+                {
+                  "display": "!",
+                  "meaning": "Меняет истину на ложь и наоборот"
+                },
+                {
+                  "display": "!=",
+                  "meaning": "Проверяет неравенство двух значений"
+                }
               ]
             }
           ]
@@ -613,7 +803,9 @@
               "variant": "type",
               "prompt": "Впиши пропущенный оператор (тернарный): большее из a и b.",
               "code": "int max = (a > b) ___ a : b;",
-              "answer": ["?"],
+              "answer": [
+                "?"
+              ],
               "explanation": "`условие ? значение1 : значение2`."
             }
           ]
@@ -638,13 +830,23 @@
           {
             "variant": "single",
             "prompt": "Чему равно !(0)?",
-            "options": ["0", "1", "-1", "ошибка"],
+            "options": [
+              "0",
+              "1",
+              "-1",
+              "ошибка"
+            ],
             "answer": 1
           },
           {
             "variant": "single",
             "prompt": "Что выведет: int x=3; switch(x){ case 3: printf(\"three\"); case 4: printf(\"four\"); }",
-            "options": ["three", "four", "threefour", "ничего"],
+            "options": [
+              "three",
+              "four",
+              "threefour",
+              "ничего"
+            ],
             "answer": 2,
             "explanation": "Без break выполнение «проваливается» в case 4."
           },
@@ -657,13 +859,25 @@
               "default в switch срабатывает при совпадении",
               "?: возвращает значение"
             ],
-            "answer": [0, 1, 3]
+            "answer": [
+              0,
+              1,
+              3
+            ]
           },
           {
             "variant": "order",
             "prompt": "Собери проверку: если x чётное — печатаем even",
-            "items": ["if (x % 2 == 0) {", "    printf(\"even\\n\");", "}"],
-            "answer": [0, 1, 2]
+            "items": [
+              "if (x % 2 == 0) {",
+              "    printf(\"even\\n\");",
+              "}"
+            ],
+            "answer": [
+              0,
+              1,
+              2
+            ]
           }
         ]
       }
@@ -694,7 +908,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Сколько раз выполнится тело: int i = 5; while (i < 3) { i++; }",
-              "options": ["0", "1", "2", "бесконечно"],
+              "options": [
+                "0",
+                "1",
+                "2",
+                "бесконечно"
+              ],
               "answer": 0
             },
             {
@@ -733,15 +952,28 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Сколько раз выполнится тело: for (int i = 0; i < 4; i++)?",
-              "options": ["3", "4", "5", "бесконечно"],
+              "options": [
+                "3",
+                "4",
+                "5",
+                "бесконечно"
+              ],
               "answer": 1
             },
             {
               "type": "quiz",
               "variant": "order",
               "prompt": "Расставь части заголовка for по порядку",
-              "items": ["int i = 0", "i < n", "i++"],
-              "answer": [0, 1, 2]
+              "items": [
+                "int i = 0",
+                "i < n",
+                "i++"
+              ],
+              "answer": [
+                0,
+                1,
+                2
+              ]
             }
           ]
         },
@@ -766,7 +998,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Что выведет: for (int i = 0; i < 5; i++) { if (i == 2) continue; printf(\"%d\", i); }",
-              "options": ["01234", "0134", "012", "234"],
+              "options": [
+                "01234",
+                "0134",
+                "012",
+                "234"
+              ],
               "answer": 1,
               "explanation": "continue пропускает печать при i == 2."
             },
@@ -774,10 +1011,22 @@
               "type": "practice",
               "prompt": "Сопоставь конструкцию и смысл",
               "terms": [
-                { "display": "while", "meaning": "Повторять, пока условие истинно" },
-                { "display": "do-while", "meaning": "То же, но тело выполняется минимум раз" },
-                { "display": "break", "meaning": "Выйти из цикла досрочно" },
-                { "display": "continue", "meaning": "Перейти к следующей итерации" }
+                {
+                  "display": "while",
+                  "meaning": "Повторять, пока условие истинно"
+                },
+                {
+                  "display": "do-while",
+                  "meaning": "То же, но тело выполняется минимум раз"
+                },
+                {
+                  "display": "break",
+                  "meaning": "Выйти из цикла досрочно"
+                },
+                {
+                  "display": "continue",
+                  "meaning": "Перейти к следующей итерации"
+                }
               ]
             }
           ]
@@ -791,25 +1040,42 @@
           {
             "variant": "single",
             "prompt": "Какой цикл гарантированно выполнит тело хотя бы один раз?",
-            "options": ["while", "for", "do-while", "никакой"],
+            "options": [
+              "while",
+              "for",
+              "do-while",
+              "никакой"
+            ],
             "answer": 2
           },
           {
             "variant": "single",
             "prompt": "Что выведет: for (int i = 3; i > 0; i--) printf(\"%d\", i);",
-            "options": ["123", "321", "0123", "3210"],
+            "options": [
+              "123",
+              "321",
+              "0123",
+              "3210"
+            ],
             "answer": 1
           },
           {
             "variant": "type",
             "prompt": "Каким словом досрочно выйти из цикла? Впиши.",
             "code": "for (...) {\n    if (found) ___;\n}",
-            "answer": ["break"]
+            "answer": [
+              "break"
+            ]
           },
           {
             "variant": "single",
             "prompt": "Сколько строк напечатает: for (int i = 0; i < 3; i++) for (int j = 0; j < 2; j++) printf(\"x\\n\");",
-            "options": ["3", "5", "6", "2"],
+            "options": [
+              "3",
+              "5",
+              "6",
+              "2"
+            ],
             "answer": 2
           },
           {
@@ -852,7 +1118,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой тип у функции, которая ничего не возвращает?",
-              "options": ["int", "empty", "void", "null"],
+              "options": [
+                "int",
+                "empty",
+                "void",
+                "null"
+              ],
               "answer": 2
             },
             {
@@ -891,13 +1162,20 @@
               "variant": "type",
               "prompt": "Каким словом функция возвращает значение? Впиши пропущенное.",
               "code": "int cube(int n) {\n    ___ n * n * n;\n}",
-              "answer": ["return"]
+              "answer": [
+                "return"
+              ]
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "int add(int a, int b) { return a + b; } — что вернёт add(2, 3)?",
-              "options": ["23", "5", "6", "ничего"],
+              "options": [
+                "23",
+                "5",
+                "6",
+                "ничего"
+              ],
               "answer": 1
             }
           ]
@@ -935,10 +1213,22 @@
               "type": "practice",
               "prompt": "Сопоставь понятие и смысл",
               "terms": [
-                { "display": "параметр", "meaning": "Входные данные функции" },
-                { "display": "return", "meaning": "Вернуть результат и выйти из функции" },
-                { "display": "void", "meaning": "Функция не возвращает значения" },
-                { "display": "рекурсия", "meaning": "Функция вызывает саму себя" }
+                {
+                  "display": "параметр",
+                  "meaning": "Входные данные функции"
+                },
+                {
+                  "display": "return",
+                  "meaning": "Вернуть результат и выйти из функции"
+                },
+                {
+                  "display": "void",
+                  "meaning": "Функция не возвращает значения"
+                },
+                {
+                  "display": "рекурсия",
+                  "meaning": "Функция вызывает саму себя"
+                }
               ]
             }
           ]
@@ -952,19 +1242,34 @@
           {
             "variant": "single",
             "prompt": "Как в C передаются параметры по умолчанию?",
-            "options": ["По ссылке", "По значению (копия)", "Через глобальные переменные", "Никак"],
+            "options": [
+              "По ссылке",
+              "По значению (копия)",
+              "Через глобальные переменные",
+              "Никак"
+            ],
             "answer": 1
           },
           {
             "variant": "single",
             "prompt": "void f(int x) { x = 0; } — изменит ли f(a) переменную a снаружи?",
-            "options": ["Да", "Нет", "Только если a == 0", "Ошибка"],
+            "options": [
+              "Да",
+              "Нет",
+              "Только если a == 0",
+              "Ошибка"
+            ],
             "answer": 1
           },
           {
             "variant": "single",
             "prompt": "Что вернёт fact(3) для int fact(int n){ return n<=1 ? 1 : n*fact(n-1); }?",
-            "options": ["3", "6", "9", "1"],
+            "options": [
+              "3",
+              "6",
+              "9",
+              "1"
+            ],
             "answer": 1
           },
           {
@@ -976,13 +1281,25 @@
               "Локальная переменная видна только в своём блоке",
               "Прототип нужен, если функция определена после main"
             ],
-            "answer": [0, 2, 3]
+            "answer": [
+              0,
+              2,
+              3
+            ]
           },
           {
             "variant": "order",
             "prompt": "Собери функцию, возвращающую сумму двух чисел",
-            "items": ["int add(int a, int b) {", "    return a + b;", "}"],
-            "answer": [0, 1, 2]
+            "items": [
+              "int add(int a, int b) {",
+              "    return a + b;",
+              "}"
+            ],
+            "answer": [
+              0,
+              1,
+              2
+            ]
           }
         ]
       }
@@ -1013,14 +1330,24 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой индекс у первого элемента массива?",
-              "options": ["1", "0", "-1", "зависит от типа"],
+              "options": [
+                "1",
+                "0",
+                "-1",
+                "зависит от типа"
+              ],
               "answer": 1
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "int a[6]; — какой индекс у последнего элемента?",
-              "options": ["6", "5", "7", "0"],
+              "options": [
+                "6",
+                "5",
+                "7",
+                "0"
+              ],
               "answer": 1
             }
           ]
@@ -1048,7 +1375,9 @@
               "variant": "type",
               "prompt": "Как обратиться к i-му элементу массива a? Впиши пропущенное.",
               "code": "int x = a___;",
-              "answer": ["[i]"],
+              "answer": [
+                "[i]"
+              ],
               "explanation": "Квадратные скобки с индексом: `a[i]`."
             }
           ]
@@ -1074,7 +1403,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Каким символом заканчивается строка в C?",
-              "options": ["'\\n'", "' '", "'\\0'", "'0'"],
+              "options": [
+                "'\\n'",
+                "' '",
+                "'\\0'",
+                "'0'"
+              ],
               "answer": 2,
               "explanation": "Нулевой символ (нулевой байт), не цифра '0'."
             },
@@ -1082,7 +1416,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Что вернёт strcmp(\"abc\", \"abc\")?",
-              "options": ["1", "0", "-1", "3"],
+              "options": [
+                "1",
+                "0",
+                "-1",
+                "3"
+              ],
               "answer": 1,
               "explanation": "0 означает «строки равны»."
             },
@@ -1090,10 +1429,22 @@
               "type": "practice",
               "prompt": "Сопоставь функцию из <string.h> и её действие",
               "terms": [
-                { "display": "strlen", "meaning": "Длина строки без '\\0'" },
-                { "display": "strcpy", "meaning": "Скопировать одну строку в другую" },
-                { "display": "strcmp", "meaning": "Сравнить строки (0 если равны)" },
-                { "display": "'\\0'", "meaning": "Символ конца строки" }
+                {
+                  "display": "strlen",
+                  "meaning": "Длина строки без '\\0'"
+                },
+                {
+                  "display": "strcpy",
+                  "meaning": "Скопировать одну строку в другую"
+                },
+                {
+                  "display": "strcmp",
+                  "meaning": "Сравнить строки (0 если равны)"
+                },
+                {
+                  "display": "'\\0'",
+                  "meaning": "Символ конца строки"
+                }
               ]
             }
           ]
@@ -1118,13 +1469,23 @@
           {
             "variant": "single",
             "prompt": "Что напечатает: char s[] = \"abc\"; printf(\"%d\", (int)strlen(s));",
-            "options": ["2", "3", "4", "0"],
+            "options": [
+              "2",
+              "3",
+              "4",
+              "0"
+            ],
             "answer": 1
           },
           {
             "variant": "single",
             "prompt": "Строка \"Hi\" занимает в памяти...",
-            "options": ["2 байта", "3 байта (с '\\0')", "1 байт", "нисколько"],
+            "options": [
+              "2 байта",
+              "3 байта (с '\\0')",
+              "1 байт",
+              "нисколько"
+            ],
             "answer": 1
           },
           {
@@ -1136,13 +1497,19 @@
               "Строка — массив char с '\\0' на конце",
               "strcmp возвращает 0 для равных строк"
             ],
-            "answer": [0, 2, 3]
+            "answer": [
+              0,
+              2,
+              3
+            ]
           },
           {
             "variant": "type",
             "prompt": "Какой заголовок подключить для strlen/strcpy? Впиши пропущенное.",
             "code": "#include <___.h>",
-            "answer": ["string"]
+            "answer": [
+              "string"
+            ]
           }
         ]
       }
@@ -1184,7 +1551,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "После int x=1; int *p=&x; *p=9; чему равно x?",
-              "options": ["1", "9", "адрес x", "0"],
+              "options": [
+                "1",
+                "9",
+                "адрес x",
+                "0"
+              ],
               "answer": 1,
               "explanation": "Через *p записали 9 прямо в x."
             }
@@ -1211,7 +1583,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Чему равно *(a + 1) для int a[] = {4, 8, 15}?",
-              "options": ["4", "8", "15", "адрес"],
+              "options": [
+                "4",
+                "8",
+                "15",
+                "адрес"
+              ],
               "answer": 1
             },
             {
@@ -1219,7 +1596,9 @@
               "variant": "type",
               "prompt": "Запись a[i] эквивалентна... Впиши пропущенное (со звёздочкой).",
               "code": "a[i]  ==  ___(a + i)",
-              "answer": ["*"],
+              "answer": [
+                "*"
+              ],
               "explanation": "`*(a + i)` — разыменование сдвинутого адреса."
             }
           ]
@@ -1258,10 +1637,22 @@
               "type": "practice",
               "prompt": "Сопоставь запись и смысл",
               "terms": [
-                { "display": "&x", "meaning": "Адрес переменной x" },
-                { "display": "*p", "meaning": "Значение по адресу из p" },
-                { "display": "int *p", "meaning": "Объявление указателя на int" },
-                { "display": "NULL", "meaning": "Указатель, не указывающий никуда" }
+                {
+                  "display": "&x",
+                  "meaning": "Адрес переменной x"
+                },
+                {
+                  "display": "*p",
+                  "meaning": "Значение по адресу из p"
+                },
+                {
+                  "display": "int *p",
+                  "meaning": "Объявление указателя на int"
+                },
+                {
+                  "display": "NULL",
+                  "meaning": "Указатель, не указывающий никуда"
+                }
               ]
             }
           ]
@@ -1286,13 +1677,23 @@
           {
             "variant": "single",
             "prompt": "Что напечатает: int a[] = {7,8,9}; printf(\"%d\", *(a + 2));",
-            "options": ["7", "8", "9", "адрес"],
+            "options": [
+              "7",
+              "8",
+              "9",
+              "адрес"
+            ],
             "answer": 2
           },
           {
             "variant": "single",
             "prompt": "После swap(&x, &y) через int t=*a; *a=*b; *b=t; и x=3, y=4 — что станет?",
-            "options": ["x=3, y=4", "x=4, y=3", "x=0, y=0", "ошибка"],
+            "options": [
+              "x=3, y=4",
+              "x=4, y=3",
+              "x=0, y=0",
+              "ошибка"
+            ],
             "answer": 1
           },
           {
@@ -1304,13 +1705,19 @@
               "Имя массива — адрес его первого элемента",
               "p + 1 сдвигает ровно на 1 байт"
             ],
-            "answer": [0, 1, 2]
+            "answer": [
+              0,
+              1,
+              2
+            ]
           },
           {
             "variant": "type",
             "prompt": "Каким символом получить значение по указателю p? Впиши.",
             "code": "int v = ___p;",
-            "answer": ["*"]
+            "answer": [
+              "*"
+            ]
           }
         ]
       }
@@ -1341,7 +1748,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Как обратиться к полю x структуры p?",
-              "options": ["p->x", "p.x", "p[x]", "x(p)"],
+              "options": [
+                "p->x",
+                "p.x",
+                "p[x]",
+                "x(p)"
+              ],
               "answer": 1,
               "explanation": "Через точку — если p это сама структура, не указатель."
             },
@@ -1380,7 +1792,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "У вас есть Point *pp. Как получить поле x?",
-              "options": ["pp.x", "pp->x", "*pp.x", "x->pp"],
+              "options": [
+                "pp.x",
+                "pp->x",
+                "*pp.x",
+                "x->pp"
+              ],
               "answer": 1
             },
             {
@@ -1388,7 +1805,9 @@
               "variant": "type",
               "prompt": "Оператор доступа к полю через указатель на структуру. Впиши пропущенное.",
               "code": "printf(\"%d\", pp___x);",
-              "answer": ["->"],
+              "answer": [
+                "->"
+              ],
               "explanation": "`pp->x` это то же, что `(*pp).x`."
             }
           ]
@@ -1408,17 +1827,34 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Как обратиться к полю age второго элемента массива people?",
-              "options": ["people.age[1]", "people[1].age", "people->age[1]", "age[people][1]"],
+              "options": [
+                "people.age[1]",
+                "people[1].age",
+                "people->age[1]",
+                "age[people][1]"
+              ],
               "answer": 1
             },
             {
               "type": "practice",
               "prompt": "Сопоставь запись и когда она применяется",
               "terms": [
-                { "display": ".", "meaning": "Поле у самой структуры" },
-                { "display": "->", "meaning": "Поле у указателя на структуру" },
-                { "display": "typedef", "meaning": "Короткое имя для типа" },
-                { "display": "struct { ... }", "meaning": "Объединение полей в один тип" }
+                {
+                  "display": ".",
+                  "meaning": "Поле у самой структуры"
+                },
+                {
+                  "display": "->",
+                  "meaning": "Поле у указателя на структуру"
+                },
+                {
+                  "display": "typedef",
+                  "meaning": "Короткое имя для типа"
+                },
+                {
+                  "display": "struct { ... }",
+                  "meaning": "Объединение полей в один тип"
+                }
               ]
             }
           ]
@@ -1443,7 +1879,12 @@
           {
             "variant": "single",
             "prompt": "p — структура, pp — указатель на неё. Какие обращения к полю x верны?",
-            "options": ["p.x и pp->x", "p->x и pp.x", "только p.x", "только pp->x"],
+            "options": [
+              "p.x и pp->x",
+              "p->x и pp.x",
+              "только p.x",
+              "только pp->x"
+            ],
             "answer": 0
           },
           {
@@ -1466,13 +1907,25 @@
               "Структуры нельзя класть в массив",
               "pp->x это то же, что (*pp).x"
             ],
-            "answer": [0, 1, 3]
+            "answer": [
+              0,
+              1,
+              3
+            ]
           },
           {
             "variant": "order",
             "prompt": "Объяви структуру с двумя целыми полями",
-            "items": ["struct Point {", "    int x, y;", "};"],
-            "answer": [0, 1, 2]
+            "items": [
+              "struct Point {",
+              "    int x, y;",
+              "};"
+            ],
+            "answer": [
+              0,
+              1,
+              2
+            ]
           }
         ]
       }
@@ -1516,7 +1969,9 @@
               "variant": "type",
               "prompt": "Функция для выделения памяти. Впиши пропущенное.",
               "code": "int *buf = ___(n * sizeof(int));",
-              "answer": ["malloc"]
+              "answer": [
+                "malloc"
+              ]
             }
           ]
         },
@@ -1541,14 +1996,24 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Какой режим fopen перезаписывает файл с нуля?",
-              "options": ["\"r\"", "\"w\"", "\"a\"", "\"x\""],
+              "options": [
+                "\"r\"",
+                "\"w\"",
+                "\"a\"",
+                "\"x\""
+              ],
               "answer": 1
             },
             {
               "type": "quiz",
               "variant": "single",
               "prompt": "Что нужно вызвать после работы с файлом?",
-              "options": ["free", "fclose", "return", "delete"],
+              "options": [
+                "free",
+                "fclose",
+                "return",
+                "delete"
+              ],
               "answer": 1
             }
           ]
@@ -1572,7 +2037,12 @@
               "type": "quiz",
               "variant": "single",
               "prompt": "Что возвращает fscanf, когда в файле кончились данные?",
-              "options": ["0", "NULL", "EOF", "-1 строкой"],
+              "options": [
+                "0",
+                "NULL",
+                "EOF",
+                "-1 строкой"
+              ],
               "answer": 2
             },
             {
@@ -1598,7 +2068,12 @@
           {
             "variant": "single",
             "prompt": "Сколько байт выделит malloc(5 * sizeof(int)) при sizeof(int) == 4?",
-            "options": ["5", "9", "20", "зависит"],
+            "options": [
+              "5",
+              "9",
+              "20",
+              "зависит"
+            ],
             "answer": 2
           },
           {
@@ -1615,7 +2090,12 @@
           {
             "variant": "single",
             "prompt": "Режим fopen для дозаписи в конец файла?",
-            "options": ["\"r\"", "\"w\"", "\"a\"", "\"rw\""],
+            "options": [
+              "\"r\"",
+              "\"w\"",
+              "\"a\"",
+              "\"rw\""
+            ],
             "answer": 2
           },
           {
@@ -1627,16 +2107,27 @@
               "fclose закрывает файл",
               "free выводит данные на экран"
             ],
-            "answer": [0, 1, 2]
+            "answer": [
+              0,
+              1,
+              2
+            ]
           },
           {
             "variant": "type",
             "prompt": "Константа-признак конца файла. Впиши.",
             "code": "while (fscanf(f, \"%d\", &x) != ___) { }",
-            "answer": ["EOF"]
+            "answer": [
+              "EOF"
+            ]
           }
         ]
       }
     }
-  ]
+  ],
+  "lang": "ru",
+  "source": {
+    "title": "cppreference — C language",
+    "url": "https://en.cppreference.com/w/c/language"
+  }
 }

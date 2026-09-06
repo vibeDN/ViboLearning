@@ -25,6 +25,8 @@ data class Course(
     val author: String? = null,
     val version: Int = 1,
     val startingHearts: Int = 5,
+    /** BCP-47-ish language tag of the course content, e.g. "ru", "en". Informational. */
+    val lang: String = "",
     /** Optional provenance — where the material came from. Informational only. */
     val source: CourseSource? = null,
     val modules: List<Module> = emptyList(),

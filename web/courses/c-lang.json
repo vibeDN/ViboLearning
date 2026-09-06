@@ -2124,5 +2124,10 @@
         ]
       }
     }
-  ]
+  ],
+  "lang": "ru",
+  "source": {
+    "title": "cppreference — C language",
+    "url": "https://en.cppreference.com/w/c/language"
+  }
 }

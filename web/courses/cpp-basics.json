@@ -894,5 +894,10 @@
         ]
       }
     }
-  ]
+  ],
+  "lang": "ru",
+  "source": {
+    "title": "cppreference — Language basics",
+    "url": "https://en.cppreference.com/w/cpp/language"
+  }
 }

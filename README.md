@@ -1,21 +1,32 @@
 # ViboLearning
 
-A SoloLearn-style learning app that is a **pure renderer**: you write a course as
-one JSON file, the app turns it into an interactive course — a path of lesson
-nodes, swipeable lesson cards (prose, editable/runnable code, quizzes), inline
-practice, per-module checkpoints, hearts, XP and streaks.
+A **model-agnostic runtime for learning content**. A course is one JSON file
+([`vibolearning/v1`](schema/vibolearning-v1.schema.json)); the app renders it as
+an interactive course — a path of lesson nodes, swipeable cards (prose with inline
+examples, editable/runnable code, quizzes), inline practice, per-module
+checkpoints, hearts, XP and streaks.
+
+There is **no AI at runtime**. Any model — ChatGPT, Claude, Gemini, a local model —
+or a human can turn source material into a course JSON; the app just plays it.
+See [`docs/AUTHORING.md`](docs/AUTHORING.md).
+
+```
+source material ──▶ any LLM ──▶ course.json (vibolearning/v1) ──▶ import ──▶ 📖 course
+```
 
 - **Android client** — Kotlin + Jetpack Compose. `app/`.
-- **Web app** — one self-contained file, `web/index.html`. Same JSON format, same
-  design (Nocturne). Works offline (service worker + inlined bundled course),
-  installable to the iOS home screen. Online code-run via wandbox.org, canned
-  `output` fallback.
-- **Course format** — [`docs/course-schema.md`](docs/course-schema.md) (`vibolearning/v1`).
+- **Web app** — one self-contained file, `web/index.html`. Same format, same design
+  (Nocturne). Offline (service worker), installable to the iOS home screen.
+  Online code-run via wandbox.org with a canned `output` fallback.
+  Live: **https://vibedn.github.io/ViboLearning/**
+- **Format** — [`schema/vibolearning-v1.schema.json`](schema/vibolearning-v1.schema.json) (authority) · [`docs/course-schema.md`](docs/course-schema.md) (prose).
 
 ## Status
 
-MVP. Bundled course: **«C++ с азов»** (4 modules, 12 lessons, per-module exams).
-Courses can also be imported by URL or from a file.
+MVP. Bundled courses: **«C++ с азов»** (4 modules) and **«Язык C»** (10 modules,
+30 lessons), each with per-module checkpoint exams. Import more by URL, file, or a
+`?import=<url>` link; share a course with `?course=<id>`; move progress between
+devices via export/import in the course list.
 
 ## Web app
 

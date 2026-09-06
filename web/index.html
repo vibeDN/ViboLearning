@@ -208,7 +208,8 @@
   .crow.active{background:color-mix(in srgb,var(--accent) 20%,var(--raised))}
   .crow .n{font-weight:600;font-size:15px}
   .crow .p{color:var(--muted);font-size:12px}
-  .crow .del{color:var(--muted);font-size:12px;flex:none}
+  .crow .del{color:var(--muted);font-size:12px;flex:none;padding:4px 6px}
+  .tag{display:inline-block;font-size:10px;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px;vertical-align:middle}
   .imp{display:flex;flex-direction:column;gap:10px;margin-top:6px}
   .imp input[type=text]{padding:13px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:16px}
   .imp .msg{font-size:12.5px}
@@ -1126,7 +1127,12 @@
           ]
         }
       }
-    ]
+    ],
+    "lang": "ru",
+    "source": {
+      "title": "cppreference — Language basics",
+      "url": "https://en.cppreference.com/w/cpp/language"
+    }
   },
   {
     "schema": "vibolearning/v1",
@@ -3254,7 +3260,12 @@
           ]
         }
       }
-    ]
+    ],
+    "lang": "ru",
+    "source": {
+      "title": "cppreference — C language",
+      "url": "https://en.cppreference.com/w/c/language"
+    }
   }
 ]
 </script>
@@ -3288,6 +3299,21 @@ const store = {
   markDone(courseId, id){
     const s = store.done(courseId); s.add(id);
     LS.set("vl.progress." + courseId, [...s]);
+  },
+  exportAll(){
+    const out = {};
+    try {
+      for (let i = 0; i < localStorage.length; i++){
+        const k = localStorage.key(i);
+        if (k && k.startsWith("vl.")) out[k] = LS.get(k, null);
+      }
+    } catch (e){}
+    return out;
+  },
+  importAll(obj){
+    let n = 0;
+    for (const [k, v] of Object.entries(obj || {})) if (k.startsWith("vl.")) { LS.set(k, v); n++; }
+    return n;
   },
 };
 
@@ -3325,6 +3351,7 @@ function normalizeCourse(raw){
     id, name: raw.name, description: raw.description || "",
     accent: raw.accent || null, iconUrl: raw.iconUrl || null,
     startingHearts: raw.startingHearts || 5, version: raw.version || 1,
+    lang: raw.lang || "", source: raw.source && raw.source.title ? raw.source : null,
     builtin: !!raw.builtin, modules,
   };
 }
@@ -3631,7 +3658,10 @@ function viewHome(){
       <h1>${esc(course.name)}</h1>
       <button class="iconbtn" data-act="library" aria-label="Курсы">${svg.book}</button>
     </div>
-    <div class="sub">${esc(course.description || "Курс")} · ${total} ур.${xp ? " · " + xp + " XP" : ""}</div>`;
+    <div class="sub">${esc(course.description || "Курс")} · ${total} ур.${xp ? " · " + xp + " XP" : ""}${
+      course.source && course.source.title
+        ? ` · <a href="${esc(course.source.url || "#")}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(course.source.title)}</a>`
+        : ""}</div>`;
 
   let body;
   if (S.tab === "learn"){
@@ -3848,8 +3878,12 @@ function viewLibrary(){
   const rows = list.map(c => {
     const total = c.modules.reduce((a, m) => a + m.lessons.length, 0);
     const dn = [...store.done(c.id)].filter(x => !x.endsWith("__exam")).length;
-    return `<div class="crow ${c.id === active ? "active" : ""}" data-act="switch" data-id="${esc(c.id)}">
-      <div style="flex:1"><div class="n">${esc(c.name)}</div><div class="p">${dn}/${total} уроков</div></div>
+    return `<div class="crow ${c.id === active ? "active" : ""}">
+      <div style="flex:1" data-act="switch" data-id="${esc(c.id)}">
+        <div class="n">${esc(c.name)}${c.lang ? ` <span class="tag">${esc(c.lang)}</span>` : ""}</div>
+        <div class="p">${dn}/${total} уроков${c.source && c.source.title ? " · " + esc(c.source.title) : ""}</div>
+      </div>
+      <button class="del" data-act="sharecourse" data-id="${esc(c.id)}" title="Ссылка на курс">↗</button>
       ${c.builtin ? "" : `<button class="del" data-act="delcourse" data-id="${esc(c.id)}">Удалить</button>`}
     </div>`;
   }).join("");
@@ -3866,6 +3900,15 @@ function viewLibrary(){
         <label class="btn ghost sm" style="display:block">Импорт файла .json
           <input type="file" id="impfile" accept=".json,application/json" style="display:none">
         </label>
+      </div>
+      <div class="divider"></div>
+      <div class="imp">
+        <div class="p" style="margin-bottom:2px">Прогресс хранится в этом браузере. Перенос на другое устройство:</div>
+        <button class="btn ghost sm" data-act="expprog">Экспорт прогресса (в буфер)</button>
+        ${S.progImport
+          ? `<textarea id="progblob" placeholder="вставь сюда экспортированный прогресс" style="width:100%;min-height:80px;font-family:var(--mono);font-size:13px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px"></textarea>
+             <button class="btn sm" data-act="impprogapply">Применить</button>`
+          : `<button class="btn ghost sm" data-act="impprog">Импорт прогресса</button>`}
       </div>
     </div>
   </div>`;
@@ -3912,7 +3955,7 @@ root.addEventListener("change", e => {
   }
 });
 root.addEventListener("click", e => {
-  const url = e.target.closest("#impurl"); if (url) return;
+  if (e.target.closest("#impurl") || e.target.closest("#progblob")) return;
   const node = e.target.closest("[data-act]");
   if (!node){
     if (e.target.classList.contains("scrim")){ S.library = false; S.imp = null; render(); }
@@ -3923,9 +3966,22 @@ root.addEventListener("click", e => {
   if (a === "tab"){ S.tab = node.dataset.tab; return render(); }
   if (a === "library"){ S.library = true; S.imp = null; return render(); }
   if (a === "closelib" && e.target.classList.contains("scrim")){ S.library = false; S.imp = null; return render(); }
-  if (a === "switch"){ store.setActive(node.dataset.id); S.library = false; S.imp = null; S.tab = "learn"; return render(); }
+  if (a === "switch"){ store.setActive(node.dataset.id); try { history.replaceState(null, "", shareUrl(node.dataset.id)); } catch (e){}
+    S.library = false; S.imp = null; S.progImport = false; S.tab = "learn"; return render(); }
   if (a === "delcourse"){ e.stopPropagation(); store.deleteCourse(node.dataset.id);
     if (store.active() === node.dataset.id) store.setActive(allCourses()[0].id); return render(); }
+  if (a === "sharecourse"){ e.stopPropagation(); return copyText(shareUrl(node.dataset.id), "Ссылка на курс скопирована"); }
+  if (a === "expprog"){ return copyText(JSON.stringify(store.exportAll()), "Прогресс скопирован в буфер"); }
+  if (a === "impprog"){ S.progImport = true; return render(); }
+  if (a === "impprogapply"){
+    const raw = (document.getElementById("progblob") || {}).value || "";
+    try {
+      const n = store.importAll(JSON.parse(raw));
+      S.progImport = false; render();
+      toast("Прогресс перенесён (" + n + " записей)");
+    } catch (err){ toast("Не разобрать: нужен JSON из «Экспорт прогресса»"); }
+    return;
+  }
   if (a === "importurl"){
     const v = (document.getElementById("impurl") || {}).value || "";
     if (!v.trim()) return;
@@ -4005,11 +4061,57 @@ function importRaw(raw){
   }
 }
 
-/* ============================ init ============================ */
-if (!store.active() && BUNDLED_COURSES.length) {
-  store.setActive(normalizeCourse(BUNDLED_COURSES[0]).id);
+/* ============================ deep links ============================ */
+function shareUrl(courseId){
+  return location.origin + location.pathname + "?course=" + encodeURIComponent(courseId);
 }
-render();
+function copyText(text, okMsg){
+  const done = () => toast(okMsg || "Скопировано");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done){
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+    done();
+  } catch (e){ toast("Не удалось скопировать"); }
+}
+
+function applyDeepLink(){
+  const params = new URLSearchParams(location.search);
+  const imp = params.get("import");
+  const wantCourse = params.get("course");
+  const hash = (location.hash || "").replace(/^#\/?/, "");
+  const lessonMatch = hash.match(/(?:lesson=|l\/)([\w.-]+)/);
+
+  const finish = () => {
+    if (wantCourse && allCourses().some(c => c.id === wantCourse)) store.setActive(wantCourse);
+    if (!store.active() && BUNDLED_COURSES.length) store.setActive(normalizeCourse(BUNDLED_COURSES[0]).id);
+    if (imp) { try { history.replaceState(null, "", location.pathname); } catch (e){} }
+    render();
+    if (lessonMatch) {
+      const lid = lessonMatch[1];
+      const c = activeCourse();
+      if (c.modules.some(m => m.lessons.some(l => l.id === lid))) startSession("lesson", lid);
+    }
+  };
+
+  if (imp) {
+    S.imp = { url: imp, msg: "Загрузка курса по ссылке…" };
+    render();
+    fetch(imp).then(r => r.text())
+      .then(raw => { try { importRaw(raw); } catch (e){} finish(); })
+      .catch(() => { S.imp = null; toast("Не удалось загрузить курс по ссылке"); finish(); });
+  } else {
+    finish();
+  }
+}
+
+/* ============================ init ============================ */
+applyDeepLink();
 
 if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
   navigator.serviceWorker.register("sw.js").catch(() => {});
