@@ -1,0 +1,14 @@
+{
+  "name": "ViboLearning",
+  "short_name": "ViboLearning",
+  "description": "SoloLearn-style course renderer — reads a JSON course and turns it into interactive lessons.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#161826",
+  "theme_color": "#161826",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

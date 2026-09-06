@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-e2d8d617-23b4-40cc-8da9-ba575af9ebbe/styles.css">
+  <script src="_ds/nocturne-e2d8d617-23b4-40cc-8da9-ba575af9ebbe/_ds_bundle.js"></script>
+  <style>
+    :root{
+      --color-bg:#0d1a13; --color-surface:#172a1e; --color-text:#e8f2ea;
+      --color-accent:#4fd980; --color-accent-2:#7fe0a0;
+      --color-divider:color-mix(in srgb, #e8f2ea 16%, transparent);
+      --color-neutral-100:#eef4ef; --color-neutral-200:#d7e5da; --color-neutral-300:#bdd0c1;
+      --color-neutral-400:#9fb3a3; --color-neutral-500:#829685; --color-neutral-600:#687a6b;
+      --color-neutral-700:#505f53; --color-neutral-800:#39443c; --color-neutral-900:#232b25;
+      --color-accent-100:#e8fbee; --color-accent-200:#c8f5d6; --color-accent-300:#9decb5;
+      --color-accent-400:#68dd8c; --color-accent-500:#43bd6c; --color-accent-600:#329b57;
+      --color-accent-700:#257843; --color-accent-800:#19522f; --color-accent-900:#0f321d;
+      --color-accent-2-100:#e8fbee; --color-accent-2-200:#c8f5d6; --color-accent-2-300:#9decb5;
+      --color-accent-2-400:#94d6a8; --color-accent-2-500:#75bd8c; --color-accent-2-600:#5b9a70;
+      --color-accent-2-700:#457656; --color-accent-2-800:#31513c; --color-accent-2-900:#1e3225;
+      --color-section:#123420; --color-section-glow:#1b4a2e; --color-section-ghost:#2c6142;
+      --shadow-sm:0 0 0 1px #39443c; --shadow-md:0 0 0 1px #505f53, 0 6px 18px rgba(0,0,0,0.55);
+      --shadow-lg:0 0 0 1px #829685, 0 16px 40px rgba(0,0,0,0.65);
+      --color-danger:#e5484d;
+    }
+    body{margin:0}
+    @keyframes slideIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes shakeX{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}
+    @keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(150px) rotate(360deg);opacity:0}}
+    @keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+    @keyframes barFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  </style>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#05080a;padding:32px;box-sizing:border-box;font-family:var(--font-body)">
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="390px,844px" dark="{{ true }}" title="Python">
+  <div style="height:100%;width:100%;display:flex;flex-direction:column;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);overflow:hidden;position:relative">
+
+    <sc-if value="{{ isPath }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:1;overflow-y:auto;padding-bottom:84px">
+        <sc-if value="{{ isTabLearn }}">
+          <div style="padding:20px 20px 4px">
+            <h2 style="margin:0 0 4px;font-size:22px">Python</h2>
+            <div style="font-size:13px;color:var(--color-neutral-500)">Курс для начинающих · 6 уроков</div>
+          </div>
+          <div style="padding:28px 20px 20px;display:flex;flex-direction:column;align-items:center;gap:28px">
+            <sc-for list="{{ pathItems }}" as="item" hint-placeholder-count="7">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;transform:translateX({{ item.offsetX }}px);animation:slideIn .4s ease backwards;animation-delay:{{ item.delayMs }}ms">
+                <div onClick="{{ item.onClick }}" style="width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:{{ item.circleBg }};border:3px solid {{ item.circleBorder }};box-shadow:var(--shadow-sm);transition:transform .15s ease" style-hover="transform:scale(1.06)">
+                  <sc-if value="{{ item.showDumbbell }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="width:22px;height:22px;color:{{ item.iconColor }}"><path d="M4 12h16M4 9v6M20 9v6M7 7v10M17 7v10"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ item.isCompleted }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;color:{{ item.iconColor }}"><path d="M5 13l4 4L19 7"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ item.isCurrent }}">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;color:{{ item.iconColor }}"><path d="M8 5v14l11-7z"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ item.isLocked }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;color:{{ item.iconColor }}"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                  </sc-if>
+                </div>
+                <div style="font-size:12px;color:var(--color-text);opacity:0.8;max-width:90px;text-align:center">{{ item.title }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isTabPractice }}">
+          <div style="padding:20px;display:flex;flex-direction:column;gap:16px;animation:slideIn .35s ease">
+            <h2 style="margin:0;font-size:22px">Практика</h2>
+            <div class="card" style="background:var(--color-surface);padding:18px;border-radius:var(--radius-lg)">
+              <div class="card-kicker">Скорость и повторение</div>
+              <div class="card-title">Проверь себя на время</div>
+              <p class="card-body">15 секунд на вопрос, без сердечек — набери максимальную серию.</p>
+              <div class="card-meta">{{ practiceStats.learned }} из {{ practiceStats.total }} терминов изучено</div>
+            </div>
+            <button onClick="{{ startPractice }}" class="btn btn-primary btn-block" style="height:52px;font-size:16px;margin-top:0">Начать практику</button>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--color-divider);background:var(--color-surface)">
+        <button onClick="{{ setTabLearn }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0 14px;background:transparent;border:none;cursor:pointer;color:{{ navLearnColor }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 5.5C4 4.67 4.67 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5C20 4.67 19.33 4 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
+          <span style="font-size:11px">Учиться</span>
+        </button>
+        <button onClick="{{ setTabPractice }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0 14px;background:transparent;border:none;cursor:pointer;color:{{ navPracticeColor }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+          <span style="font-size:11px">Практика</span>
+        </button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSession }}">
+      <div style="flex:1;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <button onClick="{{ exitSession }}" style="background:transparent;border:none;cursor:pointer;color:var(--color-neutral-500);padding:4px;flex:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:20px;height:20px"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+          <div style="flex:1;height:8px;border-radius:4px;background:var(--color-neutral-800);display:flex;overflow:hidden;gap:2px">
+            <sc-for list="{{ progressSegments }}" as="seg" hint-placeholder-count="4">
+              <div style="flex:1;background:{{ seg.color }};border-radius:4px;transform-origin:left center;animation:{{ seg.anim }};transition:background .3s ease"></div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ isLessonMode }}">
+            <div key="{{ heartsRemaining }}" style="display:flex;align-items:center;gap:4px;color:var(--color-danger);font-size:14px;font-weight:600;flex:none;animation:shakeX .4s ease">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:17px;height:17px"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.4 2.3 5 5.7 5c2 0 3.4 1.1 4.3 2.5C11 6.1 12.4 5 14.4 5c3.4 0 5.1 3.4 3.7 6.8C19.5 16.4 12 21 12 21z"/></svg>
+              {{ heartsRemaining }}
+            </div>
+          </sc-if>
+          <sc-if value="{{ isPracticeMode }}">
+            <div style="display:flex;align-items:center;gap:4px;color:var(--color-accent-2);font-size:14px;font-weight:600;flex:none">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+              {{ streak }}
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ showTimer }}">
+          <div style="height:4px;border-radius:2px;background:var(--color-neutral-800);margin-bottom:16px;overflow:hidden">
+            <div style="height:100%;width:{{ timerPct }}%;background:{{ timerColor }};transition:width 1s linear,background .3s ease"></div>
+          </div>
+        </sc-if>
+
+        <div key="{{ exIndex }}" style="flex:1;display:flex;flex-direction:column;overflow-y:auto;animation:slideIn .35s ease">
+          <div style="display:flex;align-items:center;gap:10px;background:var(--color-surface);border-radius:var(--radius-lg);padding:12px 14px;margin-bottom:20px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex:none"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.7v.4h5.2v-.4c0-.7.3-1.3.9-1.7A6 6 0 0 0 12 3z"/></svg>
+            <div style="font-size:14px;font-weight:500">{{ instruction }}</div>
+          </div>
+
+          <sc-if value="{{ isMcq }}">
+            <code style="display:inline-block;font-family:ui-monospace,Menlo,monospace;background:var(--color-neutral-900);padding:12px 16px;border-radius:var(--radius-md);font-size:20px;margin-bottom:24px;white-space:pre-wrap">{{ prompt }}</code>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ options }}" as="opt" hint-placeholder-count="4">
+                <button onClick="{{ opt.onClick }}" style="text-align:left;padding:14px 16px;border-radius:var(--radius-md);border:2px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.color }};font-size:15px;cursor:pointer;font-family:inherit;transition:all .2s ease">{{ opt.text }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isChoice }}">
+            <div style="font-family:ui-monospace,Menlo,monospace;font-size:18px;line-height:1.6;background:var(--color-neutral-900);padding:14px 16px;border-radius:var(--radius-md);margin-bottom:8px;white-space:pre-wrap">{{ segmentBefore }}<span style="display:inline-block;min-width:64px;padding:2px 8px;border-bottom:3px solid {{ blankLineColor }};color:{{ blankTextColor }};font-weight:600;text-align:center">{{ choiceBlank }}</span>{{ segmentAfter }}</div>
+            <div style="font-size:13px;color:var(--color-neutral-500);font-style:italic;margin-bottom:20px">{{ hint }}</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ options }}" as="opt" hint-placeholder-count="4">
+                <button onClick="{{ opt.onClick }}" style="text-align:left;padding:14px 16px;border-radius:var(--radius-md);border:2px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.color }};font-size:15px;cursor:pointer;font-family:ui-monospace,Menlo,monospace;transition:all .2s ease">{{ opt.text }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isType }}">
+            <div style="font-family:ui-monospace,Menlo,monospace;font-size:18px;line-height:1.6;background:var(--color-neutral-900);padding:14px 16px;border-radius:var(--radius-md);margin-bottom:8px;white-space:pre-wrap">{{ segmentBefore }}<input value="{{ typedAnswer }}" onChange="{{ onTypedChange }}" disabled="{{ answeredBool }}" placeholder="..." style="display:inline-block;width:120px;margin:0 4px;text-align:center;vertical-align:middle;font-family:inherit;font-size:inherit;background:var(--color-surface);color:var(--color-text);border:1px solid var(--color-divider);border-radius:6px;padding:2px 6px"/>{{ segmentAfter }}</div>
+            <div style="font-size:13px;color:var(--color-neutral-500);font-style:italic;margin-bottom:20px">{{ hint }}</div>
+            <sc-if value="{{ showCheckButton }}">
+              <button onClick="{{ checkTyped }}" disabled="{{ checkDisabled }}" class="btn btn-primary btn-block" style="height:48px;margin-top:8px">Проверить</button>
+            </sc-if>
+          </sc-if>
+
+          <sc-if value="{{ isMatch }}">
+            <div style="display:flex;gap:14px">
+              <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ leftCards }}" as="card" hint-placeholder-count="4">
+                  <button onClick="{{ card.onClick }}" style="padding:14px 10px;border-radius:var(--radius-md);border:2px solid {{ card.border }};background:{{ card.bg }};color:{{ card.color }};opacity:{{ card.opacity }};font-size:14px;cursor:pointer;text-align:center;font-family:ui-monospace,Menlo,monospace;transition:all .2s ease">{{ card.text }}</button>
+                </sc-for>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ rightCards }}" as="card" hint-placeholder-count="4">
+                  <button onClick="{{ card.onClick }}" style="padding:14px 10px;border-radius:var(--radius-md);border:2px solid {{ card.border }};background:{{ card.bg }};color:{{ card.color }};opacity:{{ card.opacity }};font-size:13px;cursor:pointer;text-align:center;font-family:inherit;transition:all .2s ease">{{ card.text }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ showFeedback }}">
+          <div style="margin:16px -16px -16px;padding:16px;background:{{ feedbackBg }};display:flex;flex-direction:column;gap:10px;animation:slideIn .3s ease">
+            <div style="font-weight:600;color:{{ feedbackColor }}">{{ feedbackText }}</div>
+            <button onClick="{{ continueNext }}" class="btn btn-primary btn-block" style="height:48px;margin-top:0">Продолжить</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isComplete }}">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:16px;padding:32px 24px;text-align:center;position:relative;overflow:hidden;overflow-y:auto">
+        <span style="position:absolute;left:20%;top:0;width:8px;height:8px;border-radius:2px;background:var(--color-accent);animation:confettiFall 1.3s ease-in .1s forwards"></span>
+        <span style="position:absolute;left:35%;top:0;width:7px;height:7px;border-radius:2px;background:var(--color-accent-400);animation:confettiFall 1.5s ease-in .25s forwards"></span>
+        <span style="position:absolute;left:50%;top:0;width:8px;height:8px;border-radius:50%;background:var(--color-accent-2-400);animation:confettiFall 1.2s ease-in 0s forwards"></span>
+        <span style="position:absolute;left:65%;top:0;width:7px;height:7px;border-radius:2px;background:var(--color-accent);animation:confettiFall 1.6s ease-in .3s forwards"></span>
+        <span style="position:absolute;left:80%;top:0;width:8px;height:8px;border-radius:50%;background:var(--color-accent-400);animation:confettiFall 1.35s ease-in .15s forwards"></span>
+        <span style="position:absolute;left:28%;top:0;width:6px;height:6px;border-radius:50%;background:var(--color-accent-2-400);animation:confettiFall 1.45s ease-in .4s forwards"></span>
+        <span style="position:absolute;left:72%;top:0;width:6px;height:6px;border-radius:2px;background:var(--color-accent);animation:confettiFall 1.25s ease-in .2s forwards"></span>
+        <svg viewBox="0 0 24 24" fill="var(--color-accent)" style="width:56px;height:56px;animation:popIn .5s ease;flex:none;margin-top:8px"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.6 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <sc-if value="{{ isLessonMode }}"><h2 style="margin:0">Урок пройден!</h2></sc-if>
+        <sc-if value="{{ isPracticeMode }}"><h2 style="margin:0">Практика завершена!</h2></sc-if>
+        <div style="display:flex;gap:24px">
+          <div><div style="font-size:22px;font-weight:600;color:var(--color-accent)">+{{ xpEarned }}</div><div style="font-size:12px;color:var(--color-neutral-500)">Опыт</div></div>
+          <div><div style="font-size:22px;font-weight:600">{{ correctCount }}/{{ totalExercises }}</div><div style="font-size:12px;color:var(--color-neutral-500)">Правильно</div></div>
+          <sc-if value="{{ isLessonMode }}">
+            <div><div style="font-size:22px;font-weight:600;color:var(--color-danger)">{{ heartsRemaining }}</div><div style="font-size:12px;color:var(--color-neutral-500)">Сердечки</div></div>
+          </sc-if>
+          <sc-if value="{{ isPracticeMode }}">
+            <div><div style="font-size:22px;font-weight:600;color:var(--color-accent-2)">{{ bestStreak }}</div><div style="font-size:12px;color:var(--color-neutral-500)">Лучшая серия</div></div>
+          </sc-if>
+        </div>
+        <div style="width:100%;background:var(--color-surface);border-radius:var(--radius-lg);padding:14px;display:flex;flex-direction:column;gap:4px;text-align:left">
+          <sc-if value="{{ isLessonMode }}"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--color-neutral-500);margin-bottom:4px">Ты выучил(а)</div></sc-if>
+          <sc-if value="{{ isPracticeMode }}"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--color-neutral-500);margin-bottom:4px">Ты повторил(а)</div></sc-if>
+          <sc-for list="{{ learnedWords }}" as="w" hint-placeholder-count="4">
+            <div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:7px 0;border-bottom:1px solid var(--color-divider)"><span style="font-family:ui-monospace,Menlo,monospace">{{ w.en }}</span><span style="color:var(--color-neutral-500);text-align:right">{{ w.ru }}</span></div>
+          </sc-for>
+        </div>
+        <button onClick="{{ backHome }}" class="btn btn-primary btn-block" style="height:52px;margin-top:4px;width:100%">Продолжить</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isFailed }}">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center;animation:slideIn .35s ease">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-danger)" stroke-width="1.8" stroke-linecap="round" style="width:56px;height:56px"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.2-1.3 2.6-2 4-2s2.8.7 4 2"/><circle cx="9" cy="9.5" r="1" fill="var(--color-danger)"/><circle cx="15" cy="9.5" r="1" fill="var(--color-danger)"/></svg>
+        <h2 style="margin:0">Сердечки закончились</h2>
+        <p style="color:var(--color-neutral-500);margin:0">Не переживай, попробуй ещё раз</p>
+        <button onClick="{{ retryFailed }}" class="btn btn-primary btn-block" style="height:52px;width:100%;margin-top:8px">Начать заново</button>
+        <button onClick="{{ backHome }}" class="btn btn-secondary btn-block" style="height:48px;width:100%;margin-top:0">Выйти</button>
+      </div>
+    </sc-if>
+
+  </div>
+</x-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const WORDS = [
+  {id:'print', en:'print()', code:'print', ru:'Выводит данные на экран'},
+  {id:'int', en:'int()', code:'int', ru:'Преобразует значение в целое число'},
+  {id:'str', en:'str()', code:'str', ru:'Преобразует значение в строку'},
+  {id:'float', en:'float()', code:'float', ru:'Число с плавающей точкой'},
+  {id:'bool', en:'bool()', code:'bool', ru:'Преобразует значение в True/False'},
+  {id:'trueval', en:'True', code:'True', ru:'Логическое значение "истина"'},
+  {id:'falseval', en:'False', code:'False', ru:'Логическое значение "ложь"'},
+  {id:'if', en:'if', code:'if', ru:'Условие — код выполнится, если оно истинно'},
+  {id:'else', en:'else', code:'else', ru:'Выполняется, если условие if ложно'},
+  {id:'elif', en:'elif', code:'elif', ru:'Дополнительная проверка после if'},
+  {id:'for', en:'for', code:'for', ru:'Цикл — повторяет код заданное число раз'},
+  {id:'while', en:'while', code:'while', ru:'Цикл, который выполняется, пока условие истинно'},
+  {id:'def', en:'def', code:'def', ru:'Объявляет функцию'},
+  {id:'return', en:'return', code:'return', ru:'Возвращает результат из функции'},
+  {id:'len', en:'len()', code:'len', ru:'Возвращает длину списка или строки'},
+  {id:'range', en:'range()', code:'range', ru:'Создаёт последовательность чисел'},
+  {id:'list', en:'list()', code:'list', ru:'Создаёт пустой список'},
+  {id:'append', en:'.append()', code:'.append', ru:'Добавляет элемент в конец списка'},
+  {id:'dict', en:'dict()', code:'dict', ru:'Создаёт пустой словарь'},
+  {id:'sorted', en:'sorted()', code:'sorted', ru:'Возвращает отсортированный список'},
+  {id:'input', en:'input()', code:'input', ru:'Считывает текст от пользователя'},
+  {id:'min', en:'min()', code:'min', ru:'Возвращает наименьшее значение'},
+  {id:'max', en:'max()', code:'max', ru:'Возвращает наибольшее значение'},
+  {id:'sum', en:'sum()', code:'sum', ru:'Складывает все числа в списке'}
+];
+const LESSON_DEFS = [
+  {id:1, title:'Вывод и переменные', wordIds:['print','int','str','float']},
+  {id:2, title:'Логика', wordIds:['bool','trueval','falseval','if']},
+  {id:3, title:'Ветвления и циклы', wordIds:['else','elif','for','while']},
+  {id:4, title:'Функции', wordIds:['def','return','len','range']},
+  {id:5, title:'Списки и словари', wordIds:['list','append','dict','sorted']},
+  {id:6, title:'Ввод и агрегаты', wordIds:['input','min','max','sum']}
+];
+const SENTENCES = {
+  print:{segments:['',"('Hello, world!')"],hint:'Выводит текст "Hello, world!" на экран.'},
+  int:{segments:['age = ',"('18')"],hint:'Преобразует строку "18" в число 18.'},
+  str:{segments:['name = ','(25)'],hint:'Преобразует число 25 в строку "25".'},
+  float:{segments:['pi = ','(3.14)'],hint:'Создаёт дробное число 3.14.'},
+  bool:{segments:['flag = ','(1)'],hint:'Преобразует 1 в значение True.'},
+  trueval:{segments:['is_ready = ',''],hint:'Логическое значение "истина".'},
+  falseval:{segments:['is_done = ',''],hint:'Логическое значение "ложь".'},
+  if:{segments:['','age >= 18:'],hint:'Выполнится, если возрасту 18 лет или больше.'},
+  else:{segments:["if x > 0: print('pos')\n",": print('non-pos')"],hint:'Выполняется, если условие if не сработало.'},
+  elif:{segments:["if x == 1: pass\n"," x == 2: pass"],hint:'Дополнительная проверка между if и else.'},
+  for:{segments:['',' i in range(5):'],hint:'Повторяет код 5 раз, i принимает значения 0-4.'},
+  while:{segments:['',' x < 10:'],hint:'Повторяется, пока x меньше 10.'},
+  def:{segments:['',' greet():'],hint:'Объявляет функцию с именем greet.'},
+  return:{segments:["def double(x):\n    ",' x * 2'],hint:'Возвращает удвоенное значение x.'},
+  len:{segments:['n = ','(my_list)'],hint:'Возвращает количество элементов в my_list.'},
+  range:{segments:['for i in ','(10):'],hint:'Создаёт числа от 0 до 9.'},
+  list:{segments:['items = ','()'],hint:'Создаёт пустой список.'},
+  append:{segments:['items','(\'apple\')'],hint:'Добавляет "apple" в конец списка items.'},
+  dict:{segments:['person = ','()'],hint:'Создаёт пустой словарь.'},
+  sorted:{segments:['result = ','(numbers)'],hint:'Возвращает отсортированный список numbers.'},
+  input:{segments:['name = ',"('Имя: ')"],hint:'Считывает текст, который введёт пользователь.'},
+  min:{segments:['smallest = ','(numbers)'],hint:'Возвращает наименьшее число из списка.'},
+  max:{segments:['biggest = ','(numbers)'],hint:'Возвращает наибольшее число из списка.'},
+  sum:{segments:['total = ','(numbers)'],hint:'Складывает все числа в списке.'}
+};
+
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function pickDistractors(word, pool, n){ return shuffle(pool.filter(w=>w.id!==word.id)).slice(0,n); }
+function buildMcq(word, pool){
+  const options = shuffle([word, ...pickDistractors(word, pool, 3)]).map(w=>w.ru);
+  return {type:'mcq', prompt:word.en, options, correctIndex:options.indexOf(word.ru), correctAnswerText:word.ru};
+}
+function buildChoiceSentence(word, pool){
+  const s = SENTENCES[word.id];
+  const options = shuffle([word, ...pickDistractors(word, pool, 3)]).map(w=>w.code);
+  return {type:'choice', segments:s.segments, hint:s.hint, options, correctIndex:options.indexOf(word.code), correctAnswerText:word.code};
+}
+function buildTypeSentence(word){
+  const s = SENTENCES[word.id];
+  return {type:'type', segments:s.segments, hint:s.hint, answer:word.code, correctAnswerText:word.code};
+}
+function buildMatch(words){
+  return { type:'match',
+    left: shuffle(words.map(w=>({key:w.id+'-en', text:w.en, pairId:w.id}))),
+    right: shuffle(words.map(w=>({key:w.id+'-ru', text:w.ru, pairId:w.id}))),
+    pairCount: words.length };
+}
+function buildLessonExercises(lesson){
+  const w = lesson.wordIds.map(id=>WORDS.find(x=>x.id===id));
+  return { exercises: [buildMcq(w[0],WORDS), buildChoiceSentence(w[1],WORDS), buildTypeSentence(w[2]), buildMatch(w)], wordIds: lesson.wordIds };
+}
+function buildPracticeExercises(count){
+  const n = Math.max(6, count);
+  const words = shuffle(WORDS).slice(0, n);
+  const matchWords = words.slice(0,4);
+  const singleWords = words.slice(4);
+  const exercises = singleWords.map((w,i)=>{
+    const m = i % 3;
+    if(m === 0) return buildMcq(w, WORDS);
+    if(m === 1) return buildChoiceSentence(w, WORDS);
+    return buildTypeSentence(w);
+  });
+  exercises.push(buildMatch(matchWords));
+  return { exercises, wordIds: words.map(w=>w.id) };
+}
+function freshExerciseState(){
+  return { answered:false, isCorrect:null, selectedIndex:null, typedAnswer:'',
+    matchSelectedLeft:null, matchSelectedRight:null, matchMatchedIds:[], matchWrongPair:null };
+}
+
+class Component extends DCLogic {
+  state = {
+    tab:'learn', screen:'path',
+    lessons: LESSON_DEFS.map((l,i)=>({...l, status: i<2?'completed':(i===2?'current':'locked')})),
+    sessionExercises:[], sessionWordIds:[], sourceLessonId:null, sessionMode:'lesson',
+    exIndex:0, hearts:5, correctCount:0, streak:0, bestStreak:0, timeLeft:15,
+    ...freshExerciseState()
+  };
+
+  componentWillUnmount(){ this.clearTimer(); }
+  clearTimer(){ if(this._timerId){ clearInterval(this._timerId); this._timerId=null; } }
+  startTimerIfNeeded(){
+    this.clearTimer();
+    const st = this.state;
+    if(st.sessionMode !== 'practice') return;
+    const ex = st.sessionExercises[st.exIndex];
+    if(!ex || ex.type === 'match') return;
+    this.setState({ timeLeft:15 });
+    this._timerId = setInterval(() => {
+      if(this.state.answered){ this.clearTimer(); return; }
+      const t = this.state.timeLeft - 1;
+      if(t <= 0){ this.clearTimer(); this.setState({ timeLeft:0, answered:true, isCorrect:false, streak:0 }); }
+      else this.setState({ timeLeft:t });
+    }, 1000);
+  }
+
+  startingHearts(){ return this.props.startingHearts ?? 5; }
+
+  startLesson(lesson){
+    if(lesson.status==='locked') return;
+    const built = buildLessonExercises(lesson);
+    this.setState({ screen:'session', sessionExercises: built.exercises, sessionWordIds: built.wordIds, sourceLessonId: lesson.id,
+      sessionMode:'lesson', exIndex:0, hearts:this.startingHearts(), correctCount:0, streak:0, bestStreak:0, ...freshExerciseState() });
+  }
+  startPractice(){
+    const built = buildPracticeExercises(this.props.practiceSize ?? 8);
+    this.setState({ screen:'session', sessionExercises: built.exercises, sessionWordIds: built.wordIds, sourceLessonId:null,
+      sessionMode:'practice', exIndex:0, hearts:this.startingHearts(), correctCount:0, streak:0, bestStreak:0, ...freshExerciseState() },
+      () => this.startTimerIfNeeded());
+  }
+  exitSession(){ this.clearTimer(); this.setState({ screen:'path' }); }
+  selectOption(i){
+    const st = this.state; if(st.answered) return;
+    const ex = st.sessionExercises[st.exIndex];
+    const correct = i === ex.correctIndex;
+    const isPractice = st.sessionMode === 'practice';
+    const hearts = (!isPractice && !correct) ? st.hearts - 1 : st.hearts;
+    const streak = isPractice ? (correct ? st.streak + 1 : 0) : st.streak;
+    const bestStreak = isPractice ? Math.max(st.bestStreak, streak) : st.bestStreak;
+    this.setState({ answered:true, isCorrect:correct, selectedIndex:i, hearts, streak, bestStreak });
+  }
+  setTyped(v){ this.setState({ typedAnswer:v }); }
+  checkTyped(){
+    const st = this.state; if(st.answered || !st.typedAnswer.trim()) return;
+    const ex = st.sessionExercises[st.exIndex];
+    const correct = st.typedAnswer.trim() === ex.answer;
+    const isPractice = st.sessionMode === 'practice';
+    const hearts = (!isPractice && !correct) ? st.hearts - 1 : st.hearts;
+    const streak = isPractice ? (correct ? st.streak + 1 : 0) : st.streak;
+    const bestStreak = isPractice ? Math.max(st.bestStreak, streak) : st.bestStreak;
+    this.setState({ answered:true, isCorrect:correct, hearts, streak, bestStreak });
+  }
+  selectMatchSide(side, idx){
+    const st = this.state; const ex = st.sessionExercises[st.exIndex];
+    const item = side==='left' ? ex.left[idx] : ex.right[idx];
+    if(st.matchWrongPair || st.matchMatchedIds.includes(item.pairId)) return;
+    let nextLeft = st.matchSelectedLeft, nextRight = st.matchSelectedRight;
+    if(side==='left') nextLeft = (st.matchSelectedLeft===idx) ? null : idx;
+    else nextRight = (st.matchSelectedRight===idx) ? null : idx;
+    if(nextLeft!=null && nextRight!=null){
+      const leftItem = ex.left[nextLeft], rightItem = ex.right[nextRight];
+      if(leftItem.pairId === rightItem.pairId){
+        const matched = [...st.matchMatchedIds, leftItem.pairId];
+        this.setState({ matchMatchedIds: matched, matchSelectedLeft:null, matchSelectedRight:null });
+        if(matched.length === ex.pairCount){
+          setTimeout(()=>{
+            if(this.state.screen==='session'){
+              const isPractice = this.state.sessionMode==='practice';
+              const streak = isPractice ? this.state.streak+1 : this.state.streak;
+              const bestStreak = isPractice ? Math.max(this.state.bestStreak, streak) : this.state.bestStreak;
+              this.setState({ answered:true, isCorrect:true, streak, bestStreak });
+            }
+          }, 300);
+        }
+      } else {
+        this.setState({ matchSelectedLeft:nextLeft, matchSelectedRight:nextRight, matchWrongPair:[nextLeft,nextRight] });
+        setTimeout(()=>{ this.setState({ matchWrongPair:null, matchSelectedLeft:null, matchSelectedRight:null }); }, 500);
+      }
+    } else {
+      this.setState({ matchSelectedLeft:nextLeft, matchSelectedRight:nextRight });
+    }
+  }
+  continueNext(){
+    const st = this.state;
+    if(st.sessionMode==='lesson' && !st.isCorrect && st.hearts <= 0){ this.setState({ screen:'failed' }); return; }
+    const nextIndex = st.exIndex + 1;
+    const correctCount = st.correctCount + (st.isCorrect ? 1 : 0);
+    if(nextIndex >= st.sessionExercises.length){
+      let lessons = st.lessons;
+      if(st.sourceLessonId){
+        lessons = lessons.map(l => l.id === st.sourceLessonId ? {...l, status:'completed'} : l);
+        const idx = lessons.findIndex(l => l.id === st.sourceLessonId);
+        if(idx >= 0 && idx+1 < lessons.length && lessons[idx+1].status === 'locked'){
+          lessons = lessons.map((l,i) => i === idx+1 ? {...l, status:'current'} : l);
+        }
+      }
+      this.clearTimer();
+      this.setState({ screen:'complete', correctCount, lessons });
+      return;
+    }
+    this.setState({ exIndex:nextIndex, correctCount, ...freshExerciseState() }, () => this.startTimerIfNeeded());
+  }
+  retryFailed(){
+    this.setState({ screen:'session', exIndex:0, hearts:this.startingHearts(), correctCount:0, ...freshExerciseState() });
+  }
+
+  renderVals(){
+    const st = this.state;
+    const isPath = st.screen==='path', isSession = st.screen==='session',
+      isComplete = st.screen==='complete', isFailed = st.screen==='failed';
+
+    const offsets = [0,64,96,64,0,-64,-96,-64];
+    const pathItems = [];
+    st.lessons.forEach((l,i)=>{
+      pathItems.push({
+        isPractice:false, title:l.title, offsetX: offsets[pathItems.length%8], delayMs: pathItems.length*70,
+        isCompleted: l.status==='completed', isCurrent: l.status==='current', isLocked: l.status==='locked',
+        circleBg: l.status==='completed' ? 'var(--color-accent)' : l.status==='current' ? 'var(--color-surface)' : 'var(--color-neutral-800)',
+        circleBorder: l.status==='locked' ? 'var(--color-neutral-700)' : 'var(--color-accent)',
+        iconColor: l.status==='completed' ? 'var(--color-bg)' : l.status==='current' ? 'var(--color-accent)' : 'var(--color-neutral-500)',
+        onClick: () => this.startLesson(l)
+      });
+      if(i===1 || i===3){
+        const unlocked = st.lessons.slice(0, i+1).every(x => x.status !== 'locked');
+        pathItems.push({
+          isPractice:true, title:'Практика', offsetX: offsets[pathItems.length%8], delayMs: pathItems.length*70,
+          isCompleted:false, isCurrent:false, isLocked: !unlocked, showDumbbell: unlocked,
+          circleBg: unlocked ? 'var(--color-surface)' : 'var(--color-neutral-800)',
+          circleBorder: unlocked ? 'var(--color-accent-2)' : 'var(--color-neutral-700)',
+          iconColor: unlocked ? 'var(--color-accent-2)' : 'var(--color-neutral-500)',
+          onClick: unlocked ? (() => this.startPractice()) : (() => {})
+        });
+      }
+    });
+
+    const completedCount = st.lessons.filter(l=>l.status==='completed').length;
+    const practiceStats = { learned: completedCount*4, total: WORDS.length };
+
+    const vals = {
+      isPath, isSession, isComplete, isFailed,
+      isTabLearn: st.tab==='learn', isTabPractice: st.tab==='practice',
+      isLessonMode: st.sessionMode==='lesson', isPracticeMode: st.sessionMode==='practice',
+      pathItems, practiceStats, streak: st.streak, bestStreak: st.bestStreak,
+      navLearnColor: st.tab==='learn' ? 'var(--color-accent)' : 'var(--color-neutral-500)',
+      navPracticeColor: st.tab==='practice' ? 'var(--color-accent)' : 'var(--color-neutral-500)',
+      setTabLearn: () => this.setState({tab:'learn'}),
+      setTabPractice: () => this.setState({tab:'practice'}),
+      startPractice: () => this.startPractice(),
+      exitSession: () => this.exitSession(),
+      continueNext: () => this.continueNext(),
+      retryFailed: () => this.retryFailed(),
+      backHome: () => this.setState({screen:'path'}),
+      correctCount: st.correctCount,
+      totalExercises: st.sessionExercises.length,
+      heartsRemaining: st.hearts,
+      xpEarned: isComplete ? st.correctCount*2 + 10 : 0,
+      learnedWords: isComplete ? st.sessionWordIds.map(id => WORDS.find(w=>w.id===id)) : []
+    };
+
+    if(isSession){
+      const ex = st.sessionExercises[st.exIndex];
+      vals.exIndex = st.exIndex;
+      vals.isMcq = ex.type==='mcq'; vals.isChoice = ex.type==='choice'; vals.isType = ex.type==='type'; vals.isMatch = ex.type==='match';
+      vals.showTimer = st.sessionMode==='practice' && ex.type!=='match';
+      vals.timerPct = Math.max(0, Math.round((st.timeLeft/15)*100));
+      vals.timerColor = st.timeLeft<=5 ? 'var(--color-danger)' : 'var(--color-accent)';
+      vals.progressSegments = st.sessionExercises.map((e,i)=>({
+        color: i < st.exIndex ? 'var(--color-accent)' : i === st.exIndex ? 'var(--color-accent-400)' : 'var(--color-neutral-800)',
+        anim: i === st.exIndex ? 'barFill .3s ease' : 'none'
+      }));
+
+      const buildOptions = () => ex.options.map((opt,i)=>{
+        const isSelected = st.selectedIndex===i, isCorrectOpt = i===ex.correctIndex;
+        let border='var(--color-divider)', bg='var(--color-surface)', color='var(--color-text)';
+        if(st.answered){
+          if(isCorrectOpt){ border='var(--color-accent)'; bg='color-mix(in srgb, var(--color-accent) 22%, var(--color-surface))'; color='var(--color-accent)'; }
+          else if(isSelected){ border='var(--color-danger)'; bg='color-mix(in srgb, var(--color-danger) 22%, var(--color-surface))'; color='var(--color-danger)'; }
+        } else if(isSelected){ border='var(--color-accent)'; }
+        return { text:opt, border, bg, color, onClick: () => this.selectOption(i) };
+      });
+
+      if(ex.type==='mcq'){
+        vals.instruction = 'Что означает эта конструкция?';
+        vals.prompt = ex.prompt;
+        vals.options = buildOptions();
+      }
+
+      if(ex.type==='choice'){
+        vals.instruction = 'Выбери, что вставить в код';
+        vals.segmentBefore = ex.segments[0]; vals.segmentAfter = ex.segments[1]; vals.hint = ex.hint;
+        vals.choiceBlank = st.answered ? ex.options[st.selectedIndex] : '····';
+        vals.blankLineColor = st.answered ? (st.isCorrect ? 'var(--color-accent)' : 'var(--color-danger)') : 'var(--color-neutral-700)';
+        vals.blankTextColor = st.answered ? (st.isCorrect ? 'var(--color-accent)' : 'var(--color-danger)') : 'var(--color-neutral-400)';
+        vals.options = buildOptions();
+      }
+
+      if(ex.type==='type'){
+        vals.instruction = 'Впиши, чего не хватает в коде';
+        vals.segmentBefore = ex.segments[0]; vals.segmentAfter = ex.segments[1]; vals.hint = ex.hint;
+        vals.typedAnswer = st.typedAnswer;
+        vals.onTypedChange = (e) => this.setTyped(e.target.value);
+        vals.answeredBool = st.answered;
+        vals.checkDisabled = !st.typedAnswer.trim();
+        vals.checkTyped = () => this.checkTyped();
+        vals.showCheckButton = !st.answered;
+      }
+
+      if(ex.type==='match'){
+        vals.instruction = 'Найди пару для каждого термина';
+        const cardStyle = (item, isSelected) => {
+          const isMatched = st.matchMatchedIds.includes(item.pairId);
+          const isWrong = st.matchWrongPair && ((item===ex.left[st.matchWrongPair[0]]) || (item===ex.right[st.matchWrongPair[1]]));
+          let border='var(--color-divider)', bg='var(--color-surface)', color='var(--color-text)', opacity='1';
+          if(isMatched){ border='var(--color-accent)'; bg='color-mix(in srgb, var(--color-accent) 18%, var(--color-surface))'; color='var(--color-accent)'; opacity='0.55'; }
+          else if(isWrong){ border='var(--color-danger)'; bg='color-mix(in srgb, var(--color-danger) 18%, var(--color-surface))'; color='var(--color-danger)'; }
+          else if(isSelected){ border='var(--color-accent)'; }
+          return { border, bg, color, opacity };
+        };
+        vals.leftCards = ex.left.map((c,i)=>({ text:c.text, ...cardStyle(c, st.matchSelectedLeft===i), onClick: () => this.selectMatchSide('left', i) }));
+        vals.rightCards = ex.right.map((c,i)=>({ text:c.text, ...cardStyle(c, st.matchSelectedRight===i), onClick: () => this.selectMatchSide('right', i) }));
+      }
+
+      vals.showFeedback = st.answered;
+      vals.feedbackBg = st.isCorrect ? 'color-mix(in srgb, var(--color-accent) 16%, var(--color-surface))' : 'color-mix(in srgb, var(--color-danger) 16%, var(--color-surface))';
+      vals.feedbackColor = st.isCorrect ? 'var(--color-accent)' : 'var(--color-danger)';
+      vals.feedbackText = st.isCorrect ? 'Отлично!' : ('Правильный ответ: ' + (ex.correctAnswerText || ''));
+    }
+
+    return vals;
+  }
+}
+
+</script>
+</body>
+</html>
