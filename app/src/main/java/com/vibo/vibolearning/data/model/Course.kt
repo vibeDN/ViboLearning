@@ -25,6 +25,8 @@ data class Course(
     val author: String? = null,
     val version: Int = 1,
     val startingHearts: Int = 5,
+    /** Optional provenance — where the material came from. Informational only. */
+    val source: CourseSource? = null,
     val modules: List<Module> = emptyList(),
 ) {
     val lessonCount: Int get() = modules.sumOf { it.lessons.size }
@@ -37,6 +39,13 @@ data class Course(
         const val SCHEMA = "vibolearning/v1"
     }
 }
+
+@Serializable
+data class CourseSource(
+    val title: String = "",
+    val url: String = "",
+    val note: String = "",
+)
 
 @Serializable
 data class Module(

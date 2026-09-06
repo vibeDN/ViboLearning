@@ -19,9 +19,16 @@ The bundled example is [`../app/src/main/assets/courses/cpp-basics.json`](../app
   "author": "…",                     // optional
   "version": 1,                       // bump on re-publish; re-import refreshes content and keeps progress
   "startingHearts": 5,                // lives per lesson / exam attempt
+  "source": {                         // optional provenance / attribution
+    "title": "cppreference — Basic concepts",
+    "url": "https://en.cppreference.com/w/cpp/language/basic_concepts"
+  },
   "modules": [ /* Module[] */ ]        // required, ≥1
 }
 ```
+
+A machine-readable [JSON Schema](../schema/vibolearning-v1.schema.json) is the
+source of truth; see [`AUTHORING.md`](AUTHORING.md) for generating a course with an LLM.
 
 ## Module
 
@@ -70,8 +77,16 @@ Every block has a `type`.
 
 ### `text`
 Prose. Inline markdown: `**bold**`, `*italic*` / `_italic_`, `` `code` ``.
+Optional `code` / `output` show a short illustrative snippet on the same card
+(not runnable — use a `code` block for that). Pair almost every concept card
+with an example.
 ```jsonc
-{ "type": "text", "text": "Выполнение начинается с функции **main**." }
+{
+  "type": "text",
+  "text": "Переменная — именованная ячейка памяти. Формат: `тип имя = значение;`",
+  "code": "int age = 18;\ncout << age;",   // optional
+  "output": "18"                            // optional
+}
 ```
 
 ### `code`
